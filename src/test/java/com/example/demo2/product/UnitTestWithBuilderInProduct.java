@@ -1,8 +1,9 @@
-package com.example.demo2;
+package com.example.demo2.product;
 
 import com.example.demo2.entity.Product;
 import com.example.demo2.repository.ProductRepository;
 import com.example.demo2.repository.ProductRepositoryUuid;
+import com.example.demo2.service.UsersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -29,7 +30,9 @@ class UnitTestWithBuilderInProduct {
 
     @Autowired
     private ObjectMapper objectMapper;
-    @MockBean //вместо @Autowired заглушка для репозитория при @WebMvcTest
+    @MockBean //вместо @Autowired заглушка для сервиса, репозитория и т.д. при @WebMvcTest
+    private UsersService service;//требует еще и заглушки этого репозитория, хотя он тут вообще не применяется!!???
+    @MockBean
     private ProductRepository repo;
     @MockBean
     private ProductRepositoryUuid repositoryUuid; //требует еще и заглушки этого репозитория, хотя он тут вообще не применяется!!???
@@ -60,7 +63,7 @@ class UnitTestWithBuilderInProduct {
 
     @Test
     void get() throws Exception {
-        Product product = Product.builder().id(2).name("Nick").price(1000).build(); //!!!такое создание объекта не работает!!!
+        Product product = Product.builder().id(2).name("Nick").price(1000).build();
 
         Mockito.when(repo.findById(Mockito.any())).thenReturn(Optional.of(product));
 

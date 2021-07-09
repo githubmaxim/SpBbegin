@@ -54,14 +54,6 @@ public class DefaultUsersService implements UsersService {
 //        }
 //    }
 
-    private ResponseEntity<?> validateExistLoginUserDto(UsersDto usersDto) throws ValidationException {
-        String login = usersDto.getLogin();
-        if (!isNull(findByLogin(usersDto.getLogin()))) {
-            return ResponseEntity.status(404).body("Such login is exist");
-        }
-        return ResponseEntity.status(200).body("OK");
-    }
-
     @Override
     public void deleteUser(Integer userId) {
         log.info("!!!message by DefaultUserController, method deleteUser!!!");

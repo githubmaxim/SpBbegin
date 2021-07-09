@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.example.demo2.product;
 
 import com.example.demo2.entity.Product3;
 import com.example.demo2.repository.ProductRepositoryUuid;

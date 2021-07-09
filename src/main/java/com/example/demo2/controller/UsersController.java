@@ -25,6 +25,8 @@ public class UsersController {
 
     private final UsersService usersService;
 
+
+// Для другого написания метода saveUsers() в классе DefaultUserService
     //    @PostMapping("/save")
 //    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
 //        log.info("+++message by UserController, method saveUsers+++");
