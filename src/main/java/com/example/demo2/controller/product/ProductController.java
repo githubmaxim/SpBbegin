@@ -1,7 +1,7 @@
-package com.example.demo2.controller;
+package com.example.demo2.controller.product;
 
-import com.example.demo2.entity.Product;
-import com.example.demo2.repository.ProductRepository;
+import com.example.demo2.entity.product.Product;
+import com.example.demo2.repository.product.ProductRepository;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

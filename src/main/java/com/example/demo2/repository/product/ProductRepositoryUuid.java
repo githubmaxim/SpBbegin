@@ -1,6 +1,6 @@
-package com.example.demo2.repository;
+package com.example.demo2.repository.product;
 
-import com.example.demo2.entity.Product3;
+import com.example.demo2.entity.product.Product3;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

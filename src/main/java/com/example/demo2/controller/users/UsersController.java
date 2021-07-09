@@ -1,13 +1,10 @@
-package com.example.demo2.controller;
+package com.example.demo2.controller.users;
 
-import com.example.demo2.dto.UsersDto;
-import com.example.demo2.exception.ValidationException;
-import com.example.demo2.service.UsersService;
+import com.example.demo2.dto.users.UsersDto;
+import com.example.demo2.exception.users.ValidationException;
+import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

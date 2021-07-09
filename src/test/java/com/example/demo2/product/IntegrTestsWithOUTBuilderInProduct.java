@@ -1,7 +1,7 @@
 package com.example.demo2.product;
 
-import com.example.demo2.entity.Product;
-import com.example.demo2.repository.ProductRepository;
+import com.example.demo2.entity.product.Product;
+import com.example.demo2.repository.product.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

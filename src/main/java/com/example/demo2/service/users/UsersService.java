@@ -1,7 +1,6 @@
-package com.example.demo2.service;
+package com.example.demo2.service.users;
 
-import com.example.demo2.dto.UsersDto;
-import com.example.demo2.exception.ValidationException;
+import com.example.demo2.dto.users.UsersDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

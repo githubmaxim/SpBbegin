@@ -1,4 +1,4 @@
-package com.example.demo2.exception;
+package com.example.demo2.exception.users;
 
 public class ValidationException extends Exception {
 

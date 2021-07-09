@@ -1,9 +1,8 @@
-package com.example.demo2.service;
+package com.example.demo2.service.users;
 
-import com.example.demo2.dto.UsersDto;
-import com.example.demo2.entity.Users;
-import com.example.demo2.exception.ValidationException;
-import com.example.demo2.repository.UsersRepository;
+import com.example.demo2.dto.users.UsersDto;
+import com.example.demo2.entity.users.Users;
+import com.example.demo2.repository.users.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

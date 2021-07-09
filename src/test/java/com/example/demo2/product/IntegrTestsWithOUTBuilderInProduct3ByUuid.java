@@ -1,7 +1,7 @@
 package com.example.demo2.product;
 
-import com.example.demo2.entity.Product3;
-import com.example.demo2.repository.ProductRepositoryUuid;
+import com.example.demo2.entity.product.Product3;
+import com.example.demo2.repository.product.ProductRepositoryUuid;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
