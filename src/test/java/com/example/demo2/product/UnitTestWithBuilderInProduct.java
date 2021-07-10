@@ -1,5 +1,6 @@
 package com.example.demo2.product;
 
+import com.example.demo2.controller.product.ProductController;
 import com.example.demo2.entity.product.Product;
 import com.example.demo2.repository.product.ProductRepository;
 import com.example.demo2.repository.product.ProductRepositoryUuid;
@@ -23,19 +24,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest//вместо @SpringBootTest
+@WebMvcTest(ProductController.class)//вместо @SpringBootTest + говорим создать экземпляр только одного контроллера иначе потребует создать @MockBean-заглушки для всех контроллеров и их сервисов и репозиториев
 //@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
 @AutoConfigureMockMvc
 class UnitTestWithBuilderInProduct {
 
     @Autowired
     private ObjectMapper objectMapper;
-    @MockBean //вместо @Autowired заглушка для сервиса, репозитория и т.д. при @WebMvcTest
-    private UsersService service;//требует еще и заглушки этого репозитория, хотя он тут вообще не применяется!!???
     @MockBean
     private ProductRepository repo;
-    @MockBean
-    private ProductRepositoryUuid repositoryUuid; //требует еще и заглушки этого репозитория, хотя он тут вообще не применяется!!???
     @Autowired
     private MockMvc mockMvc;
 
