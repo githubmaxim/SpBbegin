@@ -1,4 +1,4 @@
-package com.example.demo2.product;
+package com.example.demo2.product.controller;
 
 import com.example.demo2.entity.product.Product;
 import com.example.demo2.repository.product.ProductRepository;
@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 //@WebMvcTest //вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория)
 //@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
+//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
 @AutoConfigureMockMvc
 class IntegrTestsWithOUTBuilderInProduct {
 	@Autowired

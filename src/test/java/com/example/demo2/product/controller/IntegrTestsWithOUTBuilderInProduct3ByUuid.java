@@ -1,4 +1,4 @@
-package com.example.demo2.product;
+package com.example.demo2.product.controller;
 
 import com.example.demo2.entity.product.Product3;
 import com.example.demo2.repository.product.ProductRepositoryUuid;
@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 //@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
+//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
 @AutoConfigureMockMvc
 class IntegrTestsWithOUTBuilderInProduct3ByUuid { //!!!методы репозитория findById() и deleteAll() отказываются работать с UUID!!!!
     @Autowired

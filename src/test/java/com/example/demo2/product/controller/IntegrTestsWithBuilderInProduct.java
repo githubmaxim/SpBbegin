@@ -1,13 +1,15 @@
-package com.example.demo2.product;
+package com.example.demo2.product.controller;
 
         import com.example.demo2.entity.product.Product;
         import com.example.demo2.repository.product.ProductRepository;
         import com.fasterxml.jackson.databind.ObjectMapper;
         import org.junit.jupiter.api.Test;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
         import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
         import org.springframework.boot.test.context.SpringBootTest;
         import org.springframework.http.MediaType;
+        import org.springframework.test.context.TestPropertySource;
         import org.springframework.test.web.servlet.MockMvc;
         import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -17,9 +19,9 @@ package com.example.demo2.product;
         import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
         import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest
-//@WebMvcTest //вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
-//@AutoConfigureTestDatabase  //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
+@SpringBootTest //@WebMvcTest вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
+//@AutoConfigureTestDatabase  //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties", см. в папке Литература/Spring в файле "Spring Boot - руководство New.docx" объяснение к аннотации @DataJpaTest
+//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
 @AutoConfigureMockMvc
 
 class IntegrTestsWithBuilderInProduct {
@@ -45,7 +47,7 @@ class IntegrTestsWithBuilderInProduct {
     //при @WebMvcTest и @MockBean нужно будет в каждом тестовом методе вначале создавать заглушку для поведения
     @Test
     public void add() throws Exception {
-        Product product = Product.builder().name("Nick").price(500).build();
+        Product product = Product.builder().name("Ann").price(300).build();
 
         mockMvc.perform(post("/products")
                 .content(objectMapper.writeValueAsString(product))
@@ -53,8 +55,8 @@ class IntegrTestsWithBuilderInProduct {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.name").value("Nick"))
-                .andExpect(jsonPath("$.price").value("500.0"));
+                .andExpect(jsonPath("$.name").value("Ann"))
+                .andExpect(jsonPath("$.price").value("300.0"));
     }
 
     @Test
