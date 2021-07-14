@@ -8,8 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Objects.isNull;
 
@@ -71,11 +73,28 @@ public class DefaultUsersService implements UsersService {
 
     @Override
     public List<UsersDto> findAll() {
+
         log.info("!!!message by DefaultUserController, method findAll!!!");
-        return usersRepository.findAll()
-                .stream()
-//                .map(usersConverter::fromUsersToUsersDto)
-                .map(x -> usersConverter.fromUsersToUsersDto(x))
-                .collect(Collectors.toList());
+
+        //Блок заменяющий в ответе клиенту каждое значение поля Email на строку "Information is not available".
+        //Если попытаться написать этот блок через Stream API, то выйдет не сильно короче, но читаемость кода для меня получается как "квадратное колесо".
+        //Stream API нормально пишется и читается когда работает с информацией 1-го уровня вложенности, а не 2-го (переменными классов, которые в свою очередь находятся в коллекциях).
+        //А именно с информацией 2-го уровня в 90% случаев прийдется работать (с полями сущностей).
+        List<UsersDto> usersDtoList = new  ArrayList<>();
+        List<Users> usersList = usersRepository.findAll();
+        for(Users user: usersList) {
+            UsersDto usersDto = usersConverter.fromUsersToUsersDto(user);
+            usersDto.setEmail("Information is not available");
+            usersDtoList.add(usersDto);
+        }
+        return usersDtoList;
+
+        //Блок отправляющий клиенту всю информацию без изменений
+//        return usersRepository.findAll()
+//                .stream()
+//                .map(x -> usersConverter.fromUsersToUsersDto(x))
+//                .collect(Collectors.toList());
+
+
     }
 }

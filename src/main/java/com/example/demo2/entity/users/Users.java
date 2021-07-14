@@ -8,10 +8,12 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Builder
+//Тут аннотацию @Data (которая содержит в себе 4 аннотации) применять нельзя !!! т.к. есть поле “id”, которое автоматически назначает БД.
+//При этом ломается логика, встроенной в эту аннотацию, внутренней аннотации @EqualsAndHashCode.
+
+//Аннотацию @Builder (создающую конструкторы) тут, я так понял, применять не нужно, для того чтобы доступ к данным сущности велся только через геттеры/сеттеры
 @EqualsAndHashCode(of = {"id", "name", "login", "email"}) //будет неправильно работать при автоматическом присвоении БД-ых значения полю "id", а при UUID все ОК!
 @ToString(of = {"id", "name", "login", "email"})
 

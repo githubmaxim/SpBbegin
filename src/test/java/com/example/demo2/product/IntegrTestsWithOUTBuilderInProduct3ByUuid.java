@@ -1,13 +1,15 @@
-package com.example.demo2.product.controller;
+package com.example.demo2.product;
 
 import com.example.demo2.entity.product.Product3;
 import com.example.demo2.repository.product.ProductRepositoryUuid;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -19,8 +21,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest
-//@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
-//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
+@AutoConfigureTestDatabase
+//для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
+@TestPropertySource(locations = "classpath:myTestApplication.properties") //подгружает не стаедартный "application.properties", необходимый "myTestApplication.properties"
 @AutoConfigureMockMvc
 class IntegrTestsWithOUTBuilderInProduct3ByUuid { //!!!методы репозитория findById() и deleteAll() отказываются работать с UUID!!!!
     @Autowired

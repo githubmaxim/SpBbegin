@@ -1,4 +1,4 @@
-package com.example.demo2.product.controller;
+package com.example.demo2.product;
 
         import com.example.demo2.entity.product.Product;
         import com.example.demo2.repository.product.ProductRepository;
@@ -21,7 +21,7 @@ package com.example.demo2.product.controller;
 
 @SpringBootTest //@WebMvcTest вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
 //@AutoConfigureTestDatabase  //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties", см. в папке Литература/Spring в файле "Spring Boot - руководство New.docx" объяснение к аннотации @DataJpaTest
-//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
+//@TestPropertySource(locations = "classpath:myTestApplication.properties") //подгружает нестандартный "application.properties", необходимый "myTestApplication.properties"
 @AutoConfigureMockMvc
 
 class IntegrTestsWithBuilderInProduct {
@@ -86,10 +86,13 @@ class IntegrTestsWithBuilderInProduct {
 
     @Test
     void update() throws Exception {
-        Integer id = createTestProduct("Jack", 432).getId();
+        Integer id = createTestProduct("Jack", 432).getId(); //создаем в БД новую запись, далее получаем сохраненную объект/сущьность уже с заполненным (не "null") id номером, и получаем id
 
         mockMvc.perform(put("/products/{id}", id)
-                .content(objectMapper.writeValueAsString(Product.builder().id(id).name("Max").price(555).build()))
+                .content(objectMapper.writeValueAsString(Product.builder().id(id).name("Max").price(555).build())) //создаем объект/сущьность с заполненным (не "null") номером id.
+                // Преобразовываем полученный объект/сущность, в строку JSON и отправляем его в контроллер, находящийся на листе "/products", в метод азоглавленный аннотацией @PutMapping("/{id}").
+                // Этот метод просто перезапишет еще раз эту же сущность в БД, т.к. исользуется метод "save", который если находит уже существующий такой id сущности в БД, то просто
+                // перезапишет эту сущность, с предлагаемыми для записи полями, под этим же id (см. в папке "Литература/Spring" в файле "Spring Boot-руководство New.docx" в главе Spring Data JPA)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))

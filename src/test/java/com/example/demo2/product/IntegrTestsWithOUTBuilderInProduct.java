@@ -1,4 +1,4 @@
-package com.example.demo2.product.controller;
+package com.example.demo2.product;
 
 import com.example.demo2.entity.product.Product;
 import com.example.demo2.repository.product.ProductRepository;
@@ -8,9 +8,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParseException;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -26,8 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 //@WebMvcTest //вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория)
-//@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
-//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
+//@AutoConfigureTestDatabase
+////для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
+//@TestPropertySource(locations = "classpath:myTestApplication.properties") //подгружает не стаедартный "application.properties", необходимый "myTestApplication.properties"
 @AutoConfigureMockMvc
 class IntegrTestsWithOUTBuilderInProduct {
 	@Autowired
@@ -67,10 +70,13 @@ class IntegrTestsWithOUTBuilderInProduct {
 	//
 	@Test
 	public void add() throws Exception {
-		Product product = new Product("Nick", 500);
+		Product product = new Product("Nick", 500); //создаем в БД новую запись + получаем сохраненную объект/сущьность уже с заполненным (не "null") id номером
 
 		mockMvc.perform(post("/products")
-					.content(objectMapper.writeValueAsString(product))
+					.content(objectMapper.writeValueAsString(product)) //преобразовываем полученный объект/сущность, с заполненным (не "null") номером id, в строку JSON и
+				// отправляем его в контроллер, находящийся на листе "/products", в метод азоглавленный аннотацией @PostMapping. Этот метод просто перезапишет еще раз эту же сущность в БД,
+				// т.к. исользуется метод "save", который если находит уже существующий такой id сущности в БД, то просто перезапишет эту сущность с предлагаемыми для записи полями под этим
+				// же id (см. в папке "Литература/Spring" в файле "Spring Boot-руководство New.docx" в главе Spring Data JPA)
 					.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(status().isOk())
@@ -141,18 +147,7 @@ class IntegrTestsWithOUTBuilderInProduct {
 	//(методом .endReturn()), выборке из нее необходимой части и последующей проверке этой части инфы.
 	// через assertEquals. Но как
 	//
-	@Test
-	public void getProductsList() throws Exception {
-		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/products")
-				.accept(MediaType.APPLICATION_JSON_VALUE))
-				.andReturn();
 
-		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
-		String content = mvcResult.getResponse().getContentAsString();
-		Product[] productlist = mapFromJson(content, Product[].class);
-		assertTrue(productlist.length > 0);
-	}
 
 	@Test
 	public void createProduct() throws Exception {
@@ -168,5 +163,19 @@ class IntegrTestsWithOUTBuilderInProduct {
 		String content = mvcResult.getResponse().getContentAsString(); //получаем все тело ответа
 		Product pr = mapFromJson(content, Product.class); //десериализуем тело ответа из Json-формата обратно в объект Product-класса
 		assertEquals(pr.getId(), product.getId()); //сравниваем значение id до сериализации со значением сериализованного id отправляемого в ответе
+	}
+
+	@Test
+	public void getProductsList() throws Exception {
+		Product product = createTestProduct("Emma", 7);
+		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/products")
+				.accept(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Product[] productlist = mapFromJson(content, Product[].class);
+		assertTrue(productlist.length > 0);
 	}
 }

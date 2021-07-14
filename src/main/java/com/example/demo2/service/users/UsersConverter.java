@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Builder
 public class UsersConverter {
 
-    public Users fromUsersDtoToUsers(UsersDto usersDto) { //обычное заполнение, не через Builder
+    public Users fromUsersDtoToUsers(UsersDto usersDto) { //обычное заполнение, не через сеттеры
         Users users = new Users();
         users.setId(usersDto.getId());
         users.setEmail(usersDto.getEmail());

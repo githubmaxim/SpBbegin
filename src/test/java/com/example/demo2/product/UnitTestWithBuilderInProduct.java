@@ -1,4 +1,4 @@
-package com.example.demo2.product.controller;
+package com.example.demo2.product;
 
 import com.example.demo2.controller.product.ProductController;
 import com.example.demo2.entity.product.Product;
@@ -25,8 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ProductController.class)//вместо @SpringBootTest + говорим создать экземпляр только одного контроллера иначе потребует создать @MockBean-заглушки для всех сервисов и репозиториев остальных контроллеров
-//@AutoConfigureTestDatabase //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties"
-//@TestPropertySource(locations = "classpath:myTest.properties") //подгружает не стаедартный "application.properties", необходимый "myTest.properties"
+//@AutoConfigureTestDatabase и /@TestPropertySource тут не нужны, т.к. нет подключения к БД (одни заглушки)
 @AutoConfigureMockMvc
 class UnitTestWithBuilderInProduct {
 

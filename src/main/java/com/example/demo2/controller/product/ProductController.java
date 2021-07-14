@@ -17,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductRepository repo;
 
-    @GetMapping
+    @GetMapping //в этом методе показан механизм не только вывода всей БД, но и поиска конкретной записиь по имени (если имя передано в параметрах запроса)
     public ResponseEntity<List<Product>> getAll(@RequestParam(value = "param1", required = false) String name) {
 
         try {
