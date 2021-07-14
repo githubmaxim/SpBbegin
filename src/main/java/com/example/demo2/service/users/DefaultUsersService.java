@@ -5,15 +5,10 @@ import com.example.demo2.entity.users.Users;
 import com.example.demo2.repository.users.UsersRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.Objects.isNull;
 
 @Service
 @AllArgsConstructor
@@ -26,26 +21,23 @@ public class DefaultUsersService implements UsersService {
 
 
     @Override
-    public ResponseEntity<?> saveUser(UsersDto usersDto) {
+    public void saveUser(UsersDto usersDto) { //не нужно чтобы сервис на выходе выдавал объект ResponseEntity-класса
         log.info("!!!message by DefaultUserController, method saveUser!!!");
-        if (!isNull(findByLogin(usersDto.getLogin()))) { //остальная валидация в проверочных аннотациях на самих переменных в классе "UserDto"
-            return ResponseEntity.status(444).body("Such login is exist");
-        } else {
-            Users savedUser = usersRepository.save(usersConverter.fromUsersDtoToUsers(usersDto));
-            return ResponseEntity.status(200).body("OK");
-        }
+        usersRepository.save(usersConverter.fromUsersDtoToUsers(usersDto));
     }
+
+
 //Ниже используем в методе saveUser() валидацию, написанную в отдельном методе
-    //    @Override
+//        @Override
 //    public UsersDto saveUser(UsersDto usersDto) throws ValidationException {
 //        log.info("!!!message by DefaultUserController, method saveUser!!!");
 //        validateNullUserDto(usersDto); //проходим валидацию, если нет - вылетаем на собственное исключение
 //        Users savedUser = usersRepository.save(usersConverter.fromUsersDtoToUsers(usersDto));
 //        return usersConverter.fromUsersToUsersDto(savedUser); //в ответе конвертируем "Users" обратно в "UsersDto", чтобы у клиентов небыло доступа непосредственно к нашей сущности
 //    }
-
-    //Метод валидации для вывода разных ответов в случае неправильного ввода значения "login" или всего "UserDto"
-    //А так, обычно, нужно ставить проверочные аннотации на самих переменных в классе "UserDto" и потом в методах контроллера (принимающих данные от клиента на запись) перед @RequestBody ставить аннотацию @Valid
+//
+//    //Метод валидации для вывода разных ответов в случае неправильного ввода значения "login" или всего "UserDto"
+//    //А так, обычно, нужно ставить проверочные аннотации на самих переменных в классе "UserDto" и потом в методах контроллера (принимающих данные от клиента на запись) перед @RequestBody ставить аннотацию @Valid
 //    private void validateNullUserDto(UsersDto usersDto) throws ValidationException {
 //        if (isNull(usersDto)) {
 //            throw new ValidationException("Object user is null");

@@ -1,6 +1,7 @@
 package com.example.demo2.controller.users;
 
 import com.example.demo2.dto.users.UsersDto;
+import com.example.demo2.entity.users.Users;
 import com.example.demo2.exception.users.ValidationException;
 import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 @RestController
 @RequestMapping("/users")
@@ -30,11 +33,16 @@ public class UsersController {
 //        log.info("UserController: Handling save users: " + usersDto);
 //        return usersService.saveUser(usersDto);
 //    }
-    @PostMapping("/save")
+    @PostMapping("/save") //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать не рекомендуется
     public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
         log.info("+++message by UserController, method saveUsers+++");
         log.info("UserController: Handling save users: " + usersDto);
-        return usersService.saveUser(usersDto);
+        if (!isNull(usersService.findByLogin(usersDto.getLogin()))) { //остальная валидация в проверочных аннотациях на самих переменных в классе "UserDto"
+            return ResponseEntity.status(444).body("Such login is exist");
+        } else {
+            usersService.saveUser(usersDto);
+            return ResponseEntity.status(200).body("OK");
+        }
     }
 
     @GetMapping("/findAll")
