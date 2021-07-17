@@ -3,9 +3,13 @@ package com.example.demo2.users.prototype;
 import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.entity.users.Users;
 
-public class UsersPrototype {
+public class UsersPrototypeForUnitTest {
+
+    //при Unit-тестировании при создании объекта задавать нужно все поля включая "id"
+
     public static Users aUser() {
         Users u = new Users();
+        u.setId(1);
         u.setName("test_name");
         u.setLogin("test_login");
         u.setEmail("test_email@com.ua");
@@ -14,6 +18,7 @@ public class UsersPrototype {
 
     public static UsersDto aUserDTO() {
         return UsersDto.builder()
+                .id(2)
                 .name("test_name")
                 .login("test_login")
                 .email("test_email@com.ua")
