@@ -3,9 +3,11 @@ package com.example.demo2.service.users;
 import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.entity.users.Users;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 @Builder
 public class UsersConverter {
 

@@ -21,7 +21,7 @@ package com.example.demo2.product;
 
 @SpringBootTest //@WebMvcTest вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
 //@AutoConfigureTestDatabase  //для работы не с реальной, а с виртуально БД + нужно будет внести изменения в файлы "pom.xml" и "application.properties", см. в папке Литература/Spring в файле "Spring Boot - руководство New.docx" объяснение к аннотации @DataJpaTest
-//@TestPropertySource(locations = "classpath:myTestApplication.properties") //подгружает нестандартный "application.properties", необходимый "myTestApplication.properties"
+//@TestPropertySource(locations = "classpath:myTestApplication.properties") //подгружает не стандартный "application.properties", а необходимый "myTestApplication.properties"
 @AutoConfigureMockMvc
 
 class IntegrTestsWithBuilderInProduct {

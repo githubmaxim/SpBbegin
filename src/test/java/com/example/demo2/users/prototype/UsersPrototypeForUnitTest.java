@@ -16,6 +16,15 @@ public class UsersPrototypeForUnitTest {
         return u;
     }
 
+    public static Users aUser2() {
+        Users u = new Users();
+        u.setId(2);
+        u.setName("test_name2");
+        u.setLogin("test_login2");
+        u.setEmail("test_email2@com.ua");
+        return u;
+    }
+
     public static UsersDto aUserDTO() {
         return UsersDto.builder()
                 .id(2)
