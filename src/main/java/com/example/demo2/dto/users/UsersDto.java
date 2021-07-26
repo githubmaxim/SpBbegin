@@ -1,9 +1,11 @@
 package com.example.demo2.dto.users;
 
+import com.example.demo2.entity.users.University;
 import lombok.Data;
 import lombok.Builder;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data //тут эту аннотацию (которая содержит в себе 4 аннотации) можно применять т.к. нет поля “id”, которое бы автоматически назначала БД.
       //Иначе ломается логика, встроенной в эту аннотацию, внутренней аннотации @EqualsAndHashCode.
@@ -19,4 +21,7 @@ public class UsersDto {
 
     @Email(message = "Email should be valid")
     private String email;
+
+    private List<University> universities;
+
 }

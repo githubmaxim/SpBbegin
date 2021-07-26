@@ -85,6 +85,21 @@ function createUser() {
            let userName = $("#user_name").val();
            let userLogin = $("#user_login").val();
            let userEmail = $("#user_email").val();
+           let userUniversityName = $("#user_university_name").val();
+           let userUniversityCity = $("#user_university_city").val();
+           let user = {
+                    name: userName,
+                    login: userLogin,
+                    email: userEmail,
+                    universities: [
+                                    { name: userUniversityName},
+                                    {
+                                       cities: {
+                                              city: userUniversityCity
+                                       }
+                                    }
+                    ]
+           }
            if (validateOnSpace(userName)) {alert('remove the space in the "User name" field');
            } else if (validateLength(userName)) {alert('minimum length "User name" field 3 symbols');
            } else if (!validateFirstSymbol(userName)) {alert('first symbol "User name" field should be a letter');
@@ -99,7 +114,7 @@ function createUser() {
                $.ajax({
                        type: "POST",
                        url: "http://localhost:8080/users/save",
-                       data: JSON.stringify({name: userName, login: userLogin, email: userEmail}),
+                       data: JSON.stringify(user),
                        contentType: 'application/json',
 //если действие не прошло (т.е. мы не получили код 200), и получили другой код, то обработать это событие я смог только
 //в блоке ошибок (свой код 444)!!!

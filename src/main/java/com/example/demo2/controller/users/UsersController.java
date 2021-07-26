@@ -1,7 +1,6 @@
 package com.example.demo2.controller.users;
 
 import com.example.demo2.dto.users.UsersDto;
-import com.example.demo2.entity.users.Users;
 import com.example.demo2.exception.users.ValidationException;
 import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
