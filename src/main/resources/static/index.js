@@ -1,11 +1,13 @@
 //Для всех кнопок используем вариант привязки Функций к кнопкам "<button onclick=" в файле *.html.
 //Возможно написание через "$( document ).ready(function(){ $( "button" ).click(function(){---}" в файле *.js. - у меня не получился!
 
+//Чтобы в броузере "Chrome" в "localhost:8080" увидеть изменения внесенные в файлы "*.html, *.js, *.css" необходимо нажать:
+//1. CTRL+SHIFT+DELL  2.CTRL+F5  3.CTRL+SHIFT+R
 
 //!!!Будет использовано два типа написания Ajax запросов: с использованием JQuery+JS и чистое написание на JS.
 
 //Блок написания JQuery+JS(позволяет не тестировать написанный код на разных браузерах, будет работать везде)!!!
-function searchByLogin() {
+function findByLogin() {
     let login = $("#search_field").val();
 
    $.ajax({
@@ -30,7 +32,8 @@ function searchByLogin() {
                                 '<td><button onclick="deleteUser(' + user.id + ')">Delete</button></td>' +
                                '</tr>' +
                            '</table>';
-                 $("#usersList").html(html1);
+//                 $("#usersList").html(html1);
+                 document.getElementById("usersList").innerHTML = html1;
            },
            error: function (jqXHR, exception) {
                     myError(jqXHR, exception);
@@ -61,6 +64,7 @@ function loadAllUsers() {
                                 htmlAll = htmlAll + html;
                             }
                             document.getElementById("usersList").innerHTML = htmlAll;
+//                              $("#usersList").html(htmlAll);  //почему-то тут не работает
                          },
                          error: function (jqXHR, exception) {
                                   myError(jqXHR, exception);
@@ -81,6 +85,22 @@ function deleteUser(userId) {
 }
 
 
+//Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
+function downloadFile() {
+    let fileName = $("#download_field").val();
+    if(fileName.length < 3) {
+         window.location.assign("http://localhost:8080/users/download?param1=empty");
+//         window.location.assign("http://localhost:8080/users/download/empty");
+
+    } else {
+         window.location.assign("http://localhost:8080/users/download?param1=" + fileName);
+//         window.location.assign("http://localhost:8080/users/download/" + fileName);
+
+    }
+
+}
+
+
 function createUser() {
            let userName = $("#user_name").val();
            let userLogin = $("#user_login").val();
@@ -94,9 +114,9 @@ function createUser() {
                     universities: [
                                     { name: userUniversityName},
                                     {
-                                       cities: {
+                                      cities: {
                                               city: userUniversityCity
-                                       }
+                                      }
                                     }
                     ]
            }
@@ -122,7 +142,6 @@ function createUser() {
                                myError(jqXHR, exception);
                        }
                });
-
                setTimeout(() => { loadAllUsers(); }, 200);
            }
 }

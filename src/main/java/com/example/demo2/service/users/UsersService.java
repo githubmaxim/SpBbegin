@@ -1,7 +1,10 @@
 package com.example.demo2.service.users;
 
 import com.example.demo2.dto.users.UsersDto;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UsersService {
@@ -14,4 +17,6 @@ public interface UsersService {
     UsersDto findByLogin(String login);
 
     List<UsersDto> findAll();
+
+    ResponseEntity<?> downloadFile(String fileName) throws IOException;
 }

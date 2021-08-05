@@ -5,11 +5,14 @@ import com.example.demo2.exception.users.ValidationException;
 import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.isNull;
 
@@ -58,6 +61,22 @@ public class UsersController {
         return usersService.findByLogin(login);
     }
 
+    //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
+    @GetMapping("/download")
+//    @GetMapping("/download/{fileName}")
+    public ResponseEntity<?> downloadFile(@RequestParam(value = "param1", required = false, defaultValue = "forDownload.doc") String fileName) throws IOException {
+//    public ResponseEntity<?> downloadFile(@PathVariable Optional<String> fileName) throws IOException {
+        log.info("+++message by UserController, method download+++");
+        log.info("UserController: Handling find by login request: " + fileName);
+        if (fileName.equals("empty")) {
+//        if (fileName.get().equals("empty")) {
+            return usersService.downloadFile("forDownload.doc");
+        } else {
+            return usersService.downloadFile(fileName);
+//            return usersService.downloadFile(fileName.get());
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUsers(@PathVariable Integer id) {
         log.info("+++message by UserController, method deleteUsers+++");
@@ -66,3 +85,15 @@ public class UsersController {
         return ResponseEntity.ok().build();
     }
 }
+
+         //Создание пула из 4-х фиксированных потоков на процессоре
+//    ExecutorService executorService = Executors.newFixedThreadPool(4);
+//    CompletionService executorCompletionService = new ExecutorCompletionService<>(executorService );
+//    List<Future> futures = new ArrayList<Future<Integer>>();
+//        futures.add(executorCompletionService.submit(new ....));
+//        futures.add(executorCompletionService.submit(() -> { for (int r = 0; r < 100; r++) {...}  }    );
+//        futures.add(executorCompletionService.submit(...));
+//        futures.add(executorCompletionService.submit(...));
+//
+//        for (int i=0; i<futures.size(); i++) {
+//        Integer result = executorCompletionService.take().get();

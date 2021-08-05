@@ -13,7 +13,6 @@ import javax.persistence.LockModeType;
 public interface UsersRepository extends JpaRepository<Users, Integer> {
     @Query("select u from Users u where u.login = ?1")
     @Transactional   //@Transactional(timeout = 10) //это приводит к тому, что метод становится транзакционным + запускается с таймаутом в 10 секунд
-                     //и без флага readOnly. !!! При этом все стандартные методы в репозитории уже являются тразакционными!!!
-    @Lock(LockModeType.OPTIMISTIC) //для работы этой аннотации обязательно наличие аннотации @Transactional
+//                     //и без флага readOnly. !!! При этом все стандартные методы в репозитории уже являются тразакционными!!!
     Users findByLogin(String name);
 }

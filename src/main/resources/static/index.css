@@ -1,3 +1,17 @@
+/*Чтобы в броузере "Chrome" в "localhost:8080" увидеть изменения внесенные в файлы "*.html, *.js, *.css" необходимо нажать:
+  1. CTRL+SHIFT+DELL  2.CTRL+F5  3.CTRL+SHIFT+R
+*/
+
+/*body{
+background-color: yellow;
+}
+*/
+
+ form {
+     margin: 1px;
+    }
+
+
  table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -13,3 +27,42 @@
  tr:nth-child(even) {
             background-color: #dddddd;
         }
+ h1 {
+          color: #cd66cc;
+          font-size: 120%;
+          font-family: Arial, Verdana, sans-serif;
+          text-align: left;
+          margin-top: 40px;
+     }
+
+  h2 {
+             font-size: 100%;
+             font-family: Arial, Verdana, sans-serif;
+             text-align: left;
+             color: #cd66cc;
+
+      }
+
+  h2:hover {
+             font-size: 100%;
+             font-family: Arial, Verdana, sans-serif;
+             text-align: left;
+             color: green;
+      }
+
+ h2.cl1 {
+           font-size: 100%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+
+    }
+
+
+ h2.cl1:hover {
+           font-size: 100%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+           color: blue;
+    }
+
+
