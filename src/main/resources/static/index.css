@@ -39,30 +39,25 @@ background-color: yellow;
              font-size: 100%;
              font-family: Arial, Verdana, sans-serif;
              text-align: left;
-             color: #cd66cc;
-
-      }
-
-  h2:hover {
-             font-size: 100%;
-             font-family: Arial, Verdana, sans-serif;
-             text-align: left;
-             color: green;
       }
 
  h2.cl1 {
-           font-size: 100%;
-           font-family: Arial, Verdana, sans-serif;
-           text-align: left;
-
-    }
-
-
- h2.cl1:hover {
-           font-size: 100%;
-           font-family: Arial, Verdana, sans-serif;
-           text-align: left;
            color: blue;
+           font-size: 85%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+
     }
+ h2.cl1:hover {
+           font-size: 85%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+           color: green;
+    }
+ h2.cl1:active {
+             font-size: 80%;
+             font-family: Arial, Verdana, sans-serif;
+             text-align: left;
+      }
 
 

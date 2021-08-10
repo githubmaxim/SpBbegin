@@ -5,14 +5,12 @@ import com.example.demo2.exception.users.ValidationException;
 import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Objects.isNull;
 
@@ -28,14 +26,15 @@ public class UsersController {
     private final UsersService usersService;
 
 
-// Для другого написания метода saveUsers() в классе DefaultUserService
+    // Для другого написания метода saveUsers() в классе DefaultUserService
     //    @PostMapping("/save")
 //    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
 //        log.info("+++message by UserController, method saveUsers+++");
 //        log.info("UserController: Handling save users: " + usersDto);
 //        return usersService.saveUser(usersDto);
 //    }
-    @PostMapping("/save") //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать не рекомендуется
+    @PostMapping("/save")
+    //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать в сервисе не рекомендуется
     public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
         log.info("+++message by UserController, method saveUsers+++");
         log.info("UserController: Handling save users: " + usersDto);
@@ -43,9 +42,10 @@ public class UsersController {
             return ResponseEntity.status(444).body("Such login is exist");
         } else {
             usersService.saveUser(usersDto);
-            return ResponseEntity.status(200).body("OK");
+            return ResponseEntity.status(200).body("User created");
         }
     }
+
 
     @GetMapping("/findAll")
     public List<UsersDto> findAllUsers() {
@@ -57,25 +57,10 @@ public class UsersController {
     @GetMapping("/findByLogin")
     public UsersDto findByLogin(@RequestParam(value = "param1", required = false) String login) {
         log.info("+++message by UserController, method findByLogin+++");
-        log.info("UserController: Handling find by login request: " + login);
+        log.info("UserController: Handling find by login: " + login);
         return usersService.findByLogin(login);
     }
 
-    //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
-    @GetMapping("/download")
-//    @GetMapping("/download/{fileName}")
-    public ResponseEntity<?> downloadFile(@RequestParam(value = "param1", required = false, defaultValue = "forDownload.doc") String fileName) throws IOException {
-//    public ResponseEntity<?> downloadFile(@PathVariable Optional<String> fileName) throws IOException {
-        log.info("+++message by UserController, method download+++");
-        log.info("UserController: Handling find by login request: " + fileName);
-        if (fileName.equals("empty")) {
-//        if (fileName.get().equals("empty")) {
-            return usersService.downloadFile("forDownload.doc");
-        } else {
-            return usersService.downloadFile(fileName);
-//            return usersService.downloadFile(fileName.get());
-        }
-    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUsers(@PathVariable Integer id) {
@@ -86,7 +71,7 @@ public class UsersController {
     }
 }
 
-         //Создание пула из 4-х фиксированных потоков на процессоре
+//Создание пула из 4-х фиксированных потоков на процессоре
 //    ExecutorService executorService = Executors.newFixedThreadPool(4);
 //    CompletionService executorCompletionService = new ExecutorCompletionService<>(executorService );
 //    List<Future> futures = new ArrayList<Future<Integer>>();

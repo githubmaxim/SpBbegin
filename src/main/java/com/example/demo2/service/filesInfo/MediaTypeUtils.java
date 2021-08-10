@@ -1,9 +1,11 @@
-package com.example.demo2.service.users;
+package com.example.demo2.service.filesInfo;
 
 import org.springframework.http.MediaType;
 
 import javax.servlet.ServletContext;
 
+
+//Этот класс для создания типа файла, который будет вставляться в тело ответа
 public class MediaTypeUtils {
     // abc.zip
     // abc.pdf,..

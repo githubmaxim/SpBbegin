@@ -32,8 +32,8 @@ function findByLogin() {
                                 '<td><button onclick="deleteUser(' + user.id + ')">Delete</button></td>' +
                                '</tr>' +
                            '</table>';
-//                 $("#usersList").html(html1);
-                 document.getElementById("usersList").innerHTML = html1;
+                 $("#usersList").html(html1);
+//                 document.getElementById("usersList").innerHTML = html1;
            },
            error: function (jqXHR, exception) {
                     myError(jqXHR, exception);
@@ -89,15 +89,59 @@ function deleteUser(userId) {
 function downloadFile() {
     let fileName = $("#download_field").val();
     if(fileName.length < 3) {
-         window.location.assign("http://localhost:8080/users/download?param1=empty");
+         window.location.assign("http://localhost:8080/filesInfo/download?param1=empty");
+//         window.location.assign("http://localhost:8080/users/download?param1=empty");
 //         window.location.assign("http://localhost:8080/users/download/empty");
 
     } else {
-         window.location.assign("http://localhost:8080/users/download?param1=" + fileName);
+         window.location.assign("http://localhost:8080/filesInfo/download?param1=" + fileName);
+//         window.location.assign("http://localhost:8080/users/download?param1=" + fileName);
 //         window.location.assign("http://localhost:8080/users/download/" + fileName);
 
     }
+}
 
+
+function uploadFile() {
+
+    $("#result").html(""); //очищаем поле если там уже был результат
+
+    if (window.FormData === undefined) {
+		alert('В вашем браузере FormData не поддерживается');
+	} else if ($("#js-file").val().length < 3) {
+	    alert("Not file for download");
+	} else {
+		let formData = new FormData();
+		formData.append('file', $("#js-file")[0].files[0]);
+
+//Чтобы после отпраки клиентом файла у него опять не раскрывалось окно с просьбой выбрать очередной файл для отправки на сервер:
+		    event.stopPropagation(); // Остановка механизма отправки информации с полей ввода у клиента
+            event.preventDefault();  // Полная остановка механизма отправки информации с полей ввода у клиента
+
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8080/filesInfo/upload",
+//			url: "http://localhost:8080/users/upload",
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: formData,
+			success: function( resp, textStatus, jqXHR ){
+                        // Если все ОК
+
+                        if( typeof resp.error === 'undefined' ){
+                            $("#result").html(resp);
+                             setTimeout(() => { $("#result").html(""); }, 1500); //очищаем поле чрез 15 секунд
+                        }
+                        else{
+                            console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                        }
+            },
+            error: function (jqXHR, exception) {
+                         myError(jqXHR, exception);
+            }
+		});
+	}
 }
 
 
@@ -136,13 +180,24 @@ function createUser() {
                        url: "http://localhost:8080/users/save",
                        data: JSON.stringify(user),
                        contentType: 'application/json',
+                       success: function( resp, textStatus, jqXHR ){
+                                               // Если все ОК
+
+                                               if( typeof resp.error === 'undefined' ){
+                                                   $("#created").html(resp);
+                                                    setTimeout(() => { $("#created").html(""); }, 1500); //очищаем поле чрез 15 секунд
+                                               }
+                                               else{
+                                                   console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                                               }
+                       },
 //если действие не прошло (т.е. мы не получили код 200), и получили другой код, то обработать это событие я смог только
-//в блоке ошибок (свой код 444)!!!
+//в блоке ошибок (по отправляемому собой статусу с кодом 444). Либо тут же (из того же jqXHR) можно получить отправляемое сервером сообщение - "alert(jqXHR.responseText);"!!!
                        error: function (jqXHR, exception) {
                                myError(jqXHR, exception);
                        }
                });
-               setTimeout(() => { loadAllUsers(); }, 200);
+               setTimeout(() => { loadAllUsers(); }, 1600);
            }
 }
 
