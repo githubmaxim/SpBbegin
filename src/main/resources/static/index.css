@@ -8,7 +8,7 @@ background-color: yellow;
 */
 
  form {
-     margin: 1px;
+     margin: 2px;
     }
 
 
@@ -16,6 +16,7 @@ background-color: yellow;
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
+            margin-bottom: 10px;
         }
 
  td, th {
