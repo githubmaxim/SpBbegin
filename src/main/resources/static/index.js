@@ -11,35 +11,37 @@
 
 function findByLogin() {
     let login = $("#search_field").val();
-
-   $.ajax({
-           type: "GET",
-           url: "http://localhost:8080/users/findByLogin?param1="+login,
-//или так  url: "http://localhost:8080/users/findByLogin?param1="+ $("#search_field").val(),
-           dataType: 'json',
-           success:  function (user, status, xhr) {
+    $.ajax({
+             type: "GET",
+             url: "http://localhost:8080/users/findByLogin?param1="+login,
+             contentType: 'application/json',
+             success: function( user, textStatus, jqXHR ){
                 let html1 = '<table>' +
-                               '<tr>\n' +
-                                 '<th>User id</th>\n' +
-                                  '<th>User name</th>\n' +
-                                   '<th>User login</th>\n' +
-                                   '<th>User email</th>\n' +
-                                   '<th>Delete</th>\n' +
-                               '</tr>' +
-                               '<tr>\n' +
-                                 '<td>' + user.id + '</td>\n' +
-                                 '<td>' + user.name + '</td>\n' +
-                                  '<td>' + user.login + '</td>\n' +
-                                '<td>' + user.email + '</td>' +
-                                '<td><button onclick="deleteUser(' + user.id + ')">Delete</button></td>' +
-                               '</tr>' +
+                                '<tr>\n' +
+                                    '<th>User id</th>\n' +
+                                    '<th>User name</th>\n' +
+                                    '<th>User login</th>\n' +
+                                    '<th>User email</th>\n' +
+                                    '<th>University</th>\n' +
+                                    '<th>University city</th>\n' +
+                                    '<th>Delete</th>\n' +
+                                '</tr>' +
+                                '<tr>\n' +
+                                     '<td>' + user.id + '</td>\n' +
+                                     '<td>' + user.name + '</td>\n' +
+                                     '<td>' + user.login + '</td>\n' +
+                                     '<td>' + user.email + '</td>' +
+                                     '<td>' + user.universities.name + '</td>' +
+                                     '<td>' + user.universities.cities.city + '</td>' +
+                                     '<td><button onclick="deleteUser(' + user.id + ')">Delete</button></td>' +
+                                '</tr>' +
                            '</table>';
-                 $("#usersList").html(html1);
-//                 document.getElementById("usersList").innerHTML = html1;
-           },
-           error: function (jqXHR, exception) {
-                    myError(jqXHR, exception);
-           }
+//                          $("#usersList").html(html1);
+                            document.getElementById("usersList2").innerHTML = html1;
+                           },
+             error: function (jqXHR, exception) {
+                            myError(jqXHR, exception);
+                         }
    });
 }
 
@@ -95,19 +97,33 @@ function createUser() {
            let userEmail = $("#user_email").val();
            let userUniversityName = $("#user_university_name").val();
            let userUniversityCity = $("#user_university_city").val();
+
+           //Структура для варианта связей: @OneToOne внутри @OneToOne
            let user = {
                     name: userName,
                     login: userLogin,
                     email: userEmail,
-                    universities: [
-                                    { name: userUniversityName},
-                                    {
-                                      cities: {
-                                              city: userUniversityCity
-                                      }
-                                    }
-                    ]
+                    universities: { name: userUniversityName,   // "{ -- }" так формируются данные если поле это одиночное значение, а не коллекция как вариант ниже
+                                    cities: {city: userUniversityCity}
+                     }
            }
+           //Структура для другого варианта связей: @ManyToMany, @ManyToOne и @OneToMany, которые заккоментированны в сущностях
+           //При таком варианте, при удалении данных из главной сущности "Users", данные из остальных сущностей не удаляются. При этом нельзя удалять и записывать одни и
+           //теже данные в сущности многократно - будет сбой в работе метода "findByLogin". А если все время записывать разные данные, то все ОК.
+//           let user = {
+//                    name: userName,
+//                    login: userLogin,
+//                    email: userEmail,
+//                    universities: [   // "[ -- ]" так формируются данные если поле это коллекция, а не одиночное значение как вариант выше
+//                                    { name: userUniversityName},
+//                                    {
+//                                      cities: {
+//                                              city: userUniversityCity
+//                                      }
+//                                    }
+//                    ]
+//           }
+
            if (validateOnSpace(userName)) {alert('remove the space in the "User name" field');
            } else if (validateLength(userName)) {alert('minimum length "User name" field 3 symbols');
            } else if (!validateFirstSymbol(userName)) {alert('first symbol "User name" field should be a letter');
@@ -129,7 +145,7 @@ function createUser() {
 
                                                if( typeof resp.error === 'undefined' ){
                                                    $("#created").html(resp);
-                                                    setTimeout(() => { $("#created").html(""); }, 1500); //очищаем поле чрез 15 секунд
+                                                    setTimeout(() => { $("#created").html(""); }, 1500); //очищаем поле чрез 2,5 секунды
                                                }
                                                else{
                                                    console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
@@ -141,7 +157,7 @@ function createUser() {
                                myError(jqXHR, exception);
                        }
                });
-               setTimeout(() => { loadAllUsers(); }, 1600);
+               setTimeout(() => { loadAllUsers(); }, 1550);
            }
 }
 

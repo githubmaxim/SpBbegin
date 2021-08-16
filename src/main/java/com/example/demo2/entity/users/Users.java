@@ -31,9 +31,14 @@ public class Users {
     private String login;
     private String email;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST}) //или CascadeType.MERGE - они аналог "=CascadeType.ALL", только для связи @ManyToMany и @ManyToOne
-    @JoinTable(name = "Users_University", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "university_id"))
-    @JsonIgnoreProperties("usersList") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
-    private List<University> universities;
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true) //для связи @OneToOne, "orphanRemoval = true" для удаления дочерней таблицы при удалении или отсоединении родительской
+    @JoinColumn(name = "university_id")
+    @JsonIgnoreProperties("users") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
+    private University universities;
+
+//    @ManyToMany(cascade = {CascadeType.PERSIST}) //или CascadeType.MERGE - они аналог "=CascadeType.ALL", только для связи @ManyToMany и @ManyToOne
+//    @JoinTable(name = "Users_University", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "university_id"))
+//    @JsonIgnoreProperties("usersList") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
+//    private List<University> universities;
 
 }

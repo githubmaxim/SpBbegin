@@ -58,13 +58,15 @@ public class DefaultUsersService implements UsersService {
         usersRepository.deleteById(userId);
     }
 
-    @Override
+@Override
     public UsersDto findByLogin(String login) {
         log.info("!!!message by DefaultUserService, method findByLogin!!!");
         Users users = usersRepository.findByLogin(login);
         if (users != null) {
             log.info("!!!message by DefaultUserService, method findByLogin!!! users - " + users);
-            return usersConverter.fromUsersToUsersDto(users);
+            UsersDto usersDto = usersConverter.fromUsersToUsersDto(users);
+            log.info("!!!message by DefaultUserService, method findByLogin!!! usersDTO - " + usersDto);
+            return usersDto;
         }
         log.info("!!!message by DefaultUserService, method findByLogin!!! - NULL");
         return null;
@@ -77,8 +79,8 @@ public class DefaultUsersService implements UsersService {
 
         //Блок заменяющий в ответе клиенту каждое значение поля Email на строку "Information is not available".
         //Если попытаться написать этот блок через Stream API, то выйдет не сильно короче, но читаемость кода для меня получается как "квадратное колесо".
-        //Stream API нормально пишется и читается когда работает с информацией 1-го уровня вложенности, а не 2-го (переменными классов, которые в свою очередь находятся в коллекциях).
-        //А именно с информацией 2-го уровня в 90% случаев прийдется работать (с полями сущностей).
+        //Stream API нормально пишется и читается когда работает с информацией 1-го уровня вложенности, а не 2-го/3/4 и т.д. (переменными классов, которые в свою очередь находятся в коллекциях).
+        //А именно с информацией 2-го и т.д. уровнями в 90% случаев прийдется работать (с полями сущностей).
         List<UsersDto> usersDtoList = new ArrayList<>();
         List<Users> usersList = usersRepository.findAll();
         for (Users user : usersList) {

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 
 import static java.util.Objects.isNull;
@@ -54,7 +53,8 @@ public class UsersController {
         return usersService.findAll();
     }
 
-    @GetMapping("/findByLogin")
+
+ @GetMapping("/findByLogin")
     public UsersDto findByLogin(@RequestParam(value = "param1", required = false) String login) {
         log.info("+++message by UserController, method findByLogin+++");
         log.info("UserController: Handling find by login: " + login);

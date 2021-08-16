@@ -22,6 +22,6 @@ public class UsersDto {
     @Email(message = "Email should be valid")
     private String email;
 
-    private List<University> universities;
+    private University universities;
 
 }

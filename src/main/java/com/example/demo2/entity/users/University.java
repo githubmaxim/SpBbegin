@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(of = {"id", "name", "cities"}) //будет неправильно работать при автоматическом присвоении БД-ых значения полю "id", а при UUID все ОК!
 @ToString(of = {"id", "name", "cities"})
+
 public class University {
     @Id
     @GeneratedValue
@@ -23,12 +24,22 @@ public class University {
 
     private String name;
 
-    @ManyToMany(mappedBy = "universities")
-    @JsonIgnoreProperties("universities")//эта аннотация + такая-же аннотация (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
-    private List<Users> usersList;
+    @OneToOne(optional=false, mappedBy="universities")
+//    @JsonIgnoreProperties("universities")
+    private Users users;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JsonIgnoreProperties("universitySet")
-    @JoinColumn (name = "city_id")
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "city_id")
+    @JsonIgnoreProperties("univ") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
     private City cities;
+
+
+//    @ManyToMany(mappedBy = "universities")
+//    @JsonIgnoreProperties("universities")//эта аннотация + такая-же аннотация (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
+//    private List<Users> usersList;
+//
+//    @ManyToOne(cascade = {CascadeType.PERSIST})
+//    @JsonIgnoreProperties("universitySet")
+//    @JoinColumn (name = "city_id")
+//    private City cities;
 }

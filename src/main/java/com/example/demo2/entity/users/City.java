@@ -25,7 +25,11 @@ public class City {
 
     private String city;
 
-    @OneToMany (mappedBy = "cities")
-    @JsonIgnoreProperties("cities")
-    private Set<University> universitySet;
+    @OneToOne(optional=false, mappedBy="cities")
+//    @JsonIgnoreProperties("cities")
+    private University univ;
+
+//    @OneToMany (mappedBy = "cities")
+//    @JsonIgnoreProperties("cities")
+//    private Set<University> universitySet;
 }

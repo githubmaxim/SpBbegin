@@ -12,7 +12,6 @@ function loadAllFilesInfo() {
                                 html =  '<tr>' +
                                             '<td>' + name + '</td>\n' +
                                             '<td><button onclick="downloadFileInfo(&quot;' + name + '&quot;)">Download</button></td>' + //т.к. "name" это имя файла с расширением через точку, то его необходимо помещать в кавычки (которые в HTML обозначаются "&quot;")
-//                                            '<td><button onclick="deleteFileInfo(' + name + ')">Delete</button></td>' +
                                             '<td><button onclick="deleteFileInfo(&quot;' + name + '&quot;)">Delete</button></td>' +
                                         '</tr>\n';
                                 htmlAll = htmlAll + html;

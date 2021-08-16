@@ -1,6 +1,7 @@
 package com.example.demo2.service.users;
 
 import com.example.demo2.dto.users.UsersDto;
+import com.example.demo2.entity.users.Users;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
