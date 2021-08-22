@@ -1,17 +1,13 @@
 package com.example.demo2.service.filesInfo;
 
 import com.example.demo2.dto.filesInfo.FilesInfoDto;
-import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.entity.filesInfo.FilesInfo;
-import com.example.demo2.entity.users.Users;
 import com.example.demo2.repository.filesInfo.FilesInfoRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,19 +25,26 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class DefaultFilesInfoService implements FilesInfoService {
+
+    private static final String MY_DIRECTORY = "src//test//java//com//example//demo2//fileInfo//controller"; //директория в которую/из которой будут соответственно писаться/читаться файлы
     private final FilesInfoRepository filesInfoRepository;
     private final FilesInfoConverter filesInfoConverter;
 
-    @Autowired
-    private ServletContext servletContext;
 
-   @Override
+
+    @Override
     public String singleFileUpload(MultipartFile file) throws IOException {
         log.info("!!!message by DefaultUserService, method singleFileUpload!!!");
         try {
+
+//            Проверяем наличие папки, при отсутствии создаем
+            if (Files.notExists(Paths.get(MY_DIRECTORY))) {
+                Files.createDirectory(Paths.get(MY_DIRECTORY));
+            }
+
             // Получаем файл и сохраняем его на диске в папке "D:/Java"
-            byte[]bytes = file.getBytes(); //разбили файл на последовательность байт
-            Path path = Paths.get("D://Java//" + file.getOriginalFilename()); //где getOriginalFilename() это метод интерфейса MultipartFile, возвращающий исходное имя файла в файловой системе клиента
+            byte[] bytes = file.getBytes(); //разбили файл на последовательность байт
+            Path path = Paths.get(MY_DIRECTORY + file.getOriginalFilename()); //где getOriginalFilename() это метод интерфейса MultipartFile, возвращающий исходное имя файла в файловой системе клиента
             Files.write(path, bytes);
 
             //Сохраняем информацию о сохраненном на диске файле в БД
@@ -50,15 +53,17 @@ public class DefaultFilesInfoService implements FilesInfoService {
             String name = file.getOriginalFilename();
             Long size = file.getSize();
 
-            FilesInfo filesInfo = new FilesInfo();
-            filesInfo.setName(name);
-            filesInfo.setSize(size);
-            filesInfo.setMyKey(key);
-            filesInfo.setUploadDate(localDate);
+            FilesInfo filesInfo = FilesInfo.builder()
+                    .name(name)
+                    .size(size)
+                    .myKey(key)
+                    .uploadDate(localDate)
+                    .build();
 
             filesInfoRepository.save(filesInfo);
 
-            return "\"" + file.getOriginalFilename() + "\" file uploaded";
+            return "file uploaded";
+//            return "\"" + file.getOriginalFilename() + "\" file uploaded";
         } catch (IOException e) {
             return "No \"" + file.getOriginalFilename() + "\" file loaded => " + e.getMessage();
         }
@@ -70,42 +75,37 @@ public class DefaultFilesInfoService implements FilesInfoService {
     }
 
 
-
     @Override
-    public ResponseEntity<?> downloadFile(String fileName) throws IOException {
-
-        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName); // создается типа файла, который будет вставляться в тело ответа
-
+    public ByteArrayResource downloadFile(String fileName) throws IOException {
 //   В следующем блоке кода используется механизмы "NIO 2" + "IO". Тут файл перед передачей разрывается на байты.
-        Path path = Paths.get("D:/Java" + "/" + fileName);
+        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
+        byte[] data = Files.readAllBytes(path);
+        ByteArrayResource resource = new ByteArrayResource(data);
 
-        if (Files.exists(path)) {
-            byte[] data = Files.readAllBytes(path);
-            ByteArrayResource resource = new ByteArrayResource(data);
-
-
-            HttpHeaders headers = new HttpHeaders(); //создаем объект для дальнейшей записи в него всех необходимых заголовков (это в запросе/ответе инфа идущая после первой “стартовой” строки и до превой пустой строки, после которой идет тело сообщения)
-            headers.add("Content-Disposition", String.format("attachment; filename=" + path.getFileName().toString()));
-            //следующие три строки устанавливают запрет кеширования броузерами данной отправляемой информации
-            headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-            headers.add("Pragma", "no-cache");
-            headers.add("Expires", "0");
-
-            return ResponseEntity
-                    .ok()
-                    .headers(headers)
-                    .contentType(mediaType)
-                    .contentLength(data.length)
-                    .body(resource);
-        } else {
-            log.info("!!!message by DefaultUserService, method downloadFile, block else");
-            return ResponseEntity.status(404).body("Entry Not found");
-        }
-
+        return resource;
+    }
+    @Override
+    public HttpHeaders headerForDownloadedFile(String fileName) {
+        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
+        HttpHeaders headers = new HttpHeaders(); //создаем объект для дальнейшей записи в него всех необходимых заголовков (это в запросе/ответе инфа идущая после первой “стартовой” строки и до превой пустой строки, после которой идет тело сообщения)
+        headers.add("Content-Disposition", String.format("attachment; filename=" + path.getFileName().toString()));
+        //следующие три строки устанавливают запрет кеширования броузерами данной отправляемой информации
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        return headers;
+    }
+    @Override
+    public byte[] lengthForDownloadedFile(String fileName)  throws IOException {
+        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
+        byte[] data = Files.readAllBytes(path);
+        return data;
     }
 
 
-    //   !!! В следующем блоке кода используется механизм чистого "IO". Тут файл перед передачей разрывается на байты. !!!
+
+
+    //   !!! В следующем блоке кода используется механизм чистого "IO". При этом написано так, что механизм формирования "ResponseEntity" происходит прямо тут, а не в контроллере. !!!
 //
 //        File file = new File("D:/Java" + "/" + fileName);
 //
@@ -141,7 +141,7 @@ public class DefaultFilesInfoService implements FilesInfoService {
             String fileName = filesInfoDto.getName();
             filesInfoDtoList.add(fileName);
         }
-         return filesInfoDtoList;
+        return filesInfoDtoList;
     }
 
     @Override
@@ -149,7 +149,7 @@ public class DefaultFilesInfoService implements FilesInfoService {
         log.info("!!!message by DefaultFilesInfoService, method deleteFile!!!");
         filesInfoRepository.deleteByName(fileName);
 
-        Path path = Paths.get("D:/Java" + "/" + fileName);
+        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
 
         //само удаление обязательно оборачивать в "try/catch"
         try {

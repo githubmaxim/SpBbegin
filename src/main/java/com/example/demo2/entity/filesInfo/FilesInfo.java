@@ -1,9 +1,6 @@
 package com.example.demo2.entity.filesInfo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder //создает все конструкторы, а геттеры/сеттеры создает аннотация @Data
 
 public class FilesInfo {
     @Id

@@ -64,12 +64,14 @@
             <version>1.15</version>
         </dependency>
 
+<!--Дополнительная БД для подключения при тестировании в файле "UsersRepositoryTest.java" (показывается механизм
+       использования дополнительного (а не основного application.properties) файла свойств со своими настройками) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-        <!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

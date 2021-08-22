@@ -1,6 +1,7 @@
 package com.example.demo2.service.filesInfo;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -10,7 +11,9 @@ public interface FilesInfoService {
 
     String singleFileUpload(MultipartFile file) throws IOException;
 
-    ResponseEntity<?> downloadFile(String fileName) throws IOException;
+    ByteArrayResource downloadFile(String fileName) throws IOException;
+    HttpHeaders headerForDownloadedFile (String fileName);
+    byte[] lengthForDownloadedFile (String fileName)  throws IOException;
 
     List<String> findAllFilesName();
 

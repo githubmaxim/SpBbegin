@@ -2,12 +2,16 @@ package com.example.demo2.controller.filesInfo;
 
 import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.service.filesInfo.FilesInfoService;
+import com.example.demo2.service.filesInfo.MediaTypeUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,8 +23,11 @@ public class FilesInfoController {
 
     private final FilesInfoService filesInfoService;
 
+    @Autowired
+    private ServletContext servletContext;
+
     @PostMapping("/upload")
-    public ResponseEntity<?> singleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<?> singleFileUpload(@RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
         log.info("+++message by FilesInfoController, method singleFileUpload+++ file = " + file);
         if (file.isEmpty()) {
             return ResponseEntity.status(444).body("Not file for download");
@@ -29,6 +36,7 @@ public class FilesInfoController {
         }
     }
 
+
     //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
     @GetMapping("/download")
 //    @GetMapping("/download/{fileName}")
@@ -36,14 +44,20 @@ public class FilesInfoController {
 //    public ResponseEntity<?> downloadFile(@PathVariable Optional<String> fileName) throws IOException {
         log.info("+++message by FilesInfoController, method download+++");
         log.info("FilesInfoController: Handling find by fileName: " + fileName);
+        MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName); // создается типа файла, который будет вставляться в тело ответа
         if (fileName.equals("empty")) {
 //        if (fileName.get().equals("empty")) {
-            return filesInfoService.downloadFile("forDownload.doc");
+            return ResponseEntity.status(444).body("Not file for download");
         } else {
-            return filesInfoService.downloadFile(fileName);
-//            return usersService.downloadFile(fileName.get());
+            return ResponseEntity
+                    .ok()
+                    .headers(filesInfoService.headerForDownloadedFile(fileName))
+                    .contentType(mediaType)
+                    .contentLength(filesInfoService.lengthForDownloadedFile(fileName).length)
+                    .body(filesInfoService.downloadFile(fileName));
         }
     }
+
 
     @GetMapping("/findAllFilesName")
     public List<String> findAllFilesName() {

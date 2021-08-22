@@ -4,6 +4,7 @@ import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.entity.users.Users;
 import com.example.demo2.repository.users.UsersRepository;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
+@Builder
 @Slf4j
 public class DefaultUsersService implements UsersService {
 
     private final UsersRepository usersRepository;
     private final UsersConverter usersConverter;
+
+//    public DefaultUsersService(UsersRepository usersRepository, UsersConverter usersConverter) {
+//        this.usersRepository = usersRepository;
+//        this.usersConverter = usersConverter;
+//    }
 
     @Autowired
     private ServletContext servletContext;
@@ -51,14 +58,13 @@ public class DefaultUsersService implements UsersService {
 //    }
 
 
-
     @Override
     public void deleteUser(Integer userId) {
         log.info("!!!message by DefaultUserService, method deleteUser!!!");
         usersRepository.deleteById(userId);
     }
 
-@Override
+    @Override
     public UsersDto findByLogin(String login) {
         log.info("!!!message by DefaultUserService, method findByLogin!!!");
         Users users = usersRepository.findByLogin(login);

@@ -25,27 +25,6 @@ public class UsersController {
     private final UsersService usersService;
 
 
-    // Для другого написания метода saveUsers() в классе DefaultUserService
-    //    @PostMapping("/save")
-//    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
-//        log.info("+++message by UserController, method saveUsers+++");
-//        log.info("UserController: Handling save users: " + usersDto);
-//        return usersService.saveUser(usersDto);
-//    }
-    @PostMapping("/save")
-    //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать в сервисе не рекомендуется
-    public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
-        log.info("+++message by UserController, method saveUsers+++");
-        log.info("UserController: Handling save users: " + usersDto);
-        if (!isNull(usersService.findByLogin(usersDto.getLogin()))) { //остальная валидация в проверочных аннотациях на самих переменных в классе "UserDto"
-            return ResponseEntity.status(444).body("Such login is exist");
-        } else {
-            usersService.saveUser(usersDto);
-            return ResponseEntity.status(200).body("User created");
-        }
-    }
-
-
     @GetMapping("/findAll")
     public List<UsersDto> findAllUsers() {
         log.info("+++message by UserController, method findAllUsers+++");
@@ -68,6 +47,27 @@ public class UsersController {
         log.info("UserController: Handling delete user request: " + id);
         usersService.deleteUser(id);
         return ResponseEntity.ok().build();
+    }
+
+    
+    // Для другого написания метода saveUsers() в классе DefaultUserService
+    //    @PostMapping("/save")
+//    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
+//        log.info("+++message by UserController, method saveUsers+++");
+//        log.info("UserController: Handling save users: " + usersDto);
+//        return usersService.saveUser(usersDto);
+//    }
+    @PostMapping("/save")
+    //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать в сервисе не рекомендуется
+    public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
+        log.info("+++message by UserController, method saveUsers+++");
+        log.info("UserController: Handling save users: " + usersDto);
+        if (!isNull(usersService.findByLogin(usersDto.getLogin()))) { //остальная валидация в проверочных аннотациях на самих переменных в классе "UserDto"
+            return ResponseEntity.status(444).body("Such login is exist");
+        } else {
+            usersService.saveUser(usersDto);
+            return ResponseEntity.status(200).body("User created");
+        }
     }
 }
 
