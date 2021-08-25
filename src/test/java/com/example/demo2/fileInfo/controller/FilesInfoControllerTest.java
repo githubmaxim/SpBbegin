@@ -92,11 +92,11 @@ public class FilesInfoControllerTest {
     void downloadFileNotEmpty() throws Exception {
 
         //Создаем пустой файл на диске (если такой файл уже есть тест падает), а после проверки (в самом низу) его удаляем.
-        // При этом чтобы файл каждый раз при создании не попадал под Git контроль, он указан в файле ".gitignore"
-        String directory = "src//test//java//com//example//demo2//fileInfo//controller";
+        // При этом чтобы файлы, созданные в этой дирректории, каждый раз при создании не попадали под Git контроль, дирректория указана в файле ".gitignore"
+        String directory = "src//test//java//com//example//demo2//fileInfo//forDownload2";
         String fileName = "forDownload.txt";
         Path path = Paths.get(directory + "/" + fileName);
-        Files.createDirectories(path.getParent());
+        Files.createDirectories(path.getParent()); //если не создать папку(тут мы из пути "path" исключаем название файла), то при ее отсутствии тест упадет
         try {
             Files.createFile(path);
         } catch (FileAlreadyExistsException e) {
@@ -113,8 +113,8 @@ public class FilesInfoControllerTest {
         headers.add("Expires", "0");
 
         when(filesInfoService.downloadFile(any())).thenReturn(resource);
-        when(filesInfoService.headerForDownloadedFile(any())).thenReturn(headers);
-        when(filesInfoService.lengthForDownloadedFile(any())).thenReturn(data);
+        when(filesInfoService.headerForDownloadingFile(any())).thenReturn(headers);
+        when(filesInfoService.lengthForDownloadingFile(any())).thenReturn(data);
 
         mockMvc.perform(get("/filesInfo/download?param1={param}", "forDownload.txt")) //имя могу вводить любое, заглушка все равно вернет имя "test_name"
                 .andDo(print())

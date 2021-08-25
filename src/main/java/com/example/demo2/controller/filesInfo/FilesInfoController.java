@@ -1,6 +1,5 @@
 package com.example.demo2.controller.filesInfo;
 
-import com.example.demo2.dto.users.UsersDto;
 import com.example.demo2.service.filesInfo.FilesInfoService;
 import com.example.demo2.service.filesInfo.MediaTypeUtils;
 import lombok.AllArgsConstructor;
@@ -51,9 +50,9 @@ public class FilesInfoController {
         } else {
             return ResponseEntity
                     .ok()
-                    .headers(filesInfoService.headerForDownloadedFile(fileName))
+                    .headers(filesInfoService.headerForDownloadingFile(fileName))
                     .contentType(mediaType)
-                    .contentLength(filesInfoService.lengthForDownloadedFile(fileName).length)
+                    .contentLength(filesInfoService.lengthForDownloadingFile(fileName).length)
                     .body(filesInfoService.downloadFile(fileName));
         }
     }

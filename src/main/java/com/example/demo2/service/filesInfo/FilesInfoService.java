@@ -12,8 +12,8 @@ public interface FilesInfoService {
     String singleFileUpload(MultipartFile file) throws IOException;
 
     ByteArrayResource downloadFile(String fileName) throws IOException;
-    HttpHeaders headerForDownloadedFile (String fileName);
-    byte[] lengthForDownloadedFile (String fileName)  throws IOException;
+    HttpHeaders headerForDownloadingFile(String fileName);
+    byte[] lengthForDownloadingFile(String fileName)  throws IOException;
 
     List<String> findAllFilesName();
 

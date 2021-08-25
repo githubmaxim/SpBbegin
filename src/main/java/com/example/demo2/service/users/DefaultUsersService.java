@@ -22,11 +22,6 @@ public class DefaultUsersService implements UsersService {
     private final UsersRepository usersRepository;
     private final UsersConverter usersConverter;
 
-//    public DefaultUsersService(UsersRepository usersRepository, UsersConverter usersConverter) {
-//        this.usersRepository = usersRepository;
-//        this.usersConverter = usersConverter;
-//    }
-
     @Autowired
     private ServletContext servletContext;
 

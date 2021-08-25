@@ -4,6 +4,7 @@ import com.example.demo2.dto.filesInfo.FilesInfoDto;
 import com.example.demo2.entity.filesInfo.FilesInfo;
 import com.example.demo2.repository.filesInfo.FilesInfoRepository;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -22,11 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@Builder
 @Slf4j
 public class DefaultFilesInfoService implements FilesInfoService {
 
-    private static final String MY_DIRECTORY = "src//test//java//com//example//demo2//fileInfo//controller"; //директория в которую/из которой будут соответственно писаться/читаться файлы
+    private static final String MY_DIRECTORY = "src//main//java//com//example//demo2//forDownload//"; //директория в которую/из которой будут соответственно писаться/читаться файлы
     private final FilesInfoRepository filesInfoRepository;
     private final FilesInfoConverter filesInfoConverter;
 
@@ -42,12 +43,13 @@ public class DefaultFilesInfoService implements FilesInfoService {
                 Files.createDirectory(Paths.get(MY_DIRECTORY));
             }
 
-            // Получаем файл и сохраняем его на диске в папке "D:/Java"
+            // Получаем файл и сохраняем его на диске в папке
             byte[] bytes = file.getBytes(); //разбили файл на последовательность байт
             Path path = Paths.get(MY_DIRECTORY + file.getOriginalFilename()); //где getOriginalFilename() это метод интерфейса MultipartFile, возвращающий исходное имя файла в файловой системе клиента
+            log.info("!!!message by DefaultUserService, method singleFileUpload!!! - path =" + path);
             Files.write(path, bytes);
 
-            //Сохраняем информацию о сохраненном на диске файле в БД
+            //Сохраняем в БД информацию, о файле записаном на диске
             LocalDate localDate = LocalDate.now();
             String key = generateKey(file.getOriginalFilename());
             String name = file.getOriginalFilename();
@@ -62,19 +64,20 @@ public class DefaultFilesInfoService implements FilesInfoService {
 
             filesInfoRepository.save(filesInfo);
 
+            //Возвращаем клиенту ответ
             return "file uploaded";
-//            return "\"" + file.getOriginalFilename() + "\" file uploaded";
         } catch (IOException e) {
             return "No \"" + file.getOriginalFilename() + "\" file loaded => " + e.getMessage();
         }
     }
 
-    // Метод генерации ключей
+    // Метод для генерации ключей
     private String generateKey(String name) {
         return DigestUtils.md2Hex(name + LocalDate.now().toString());
     }
 
 
+    //Следующие три метода для формирования ответа клиенту на запрос о загрузке файла
     @Override
     public ByteArrayResource downloadFile(String fileName) throws IOException {
 //   В следующем блоке кода используется механизмы "NIO 2" + "IO". Тут файл перед передачей разрывается на байты.
@@ -85,7 +88,7 @@ public class DefaultFilesInfoService implements FilesInfoService {
         return resource;
     }
     @Override
-    public HttpHeaders headerForDownloadedFile(String fileName) {
+    public HttpHeaders headerForDownloadingFile(String fileName) {
         Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
         HttpHeaders headers = new HttpHeaders(); //создаем объект для дальнейшей записи в него всех необходимых заголовков (это в запросе/ответе инфа идущая после первой “стартовой” строки и до превой пустой строки, после которой идет тело сообщения)
         headers.add("Content-Disposition", String.format("attachment; filename=" + path.getFileName().toString()));
@@ -96,12 +99,11 @@ public class DefaultFilesInfoService implements FilesInfoService {
         return headers;
     }
     @Override
-    public byte[] lengthForDownloadedFile(String fileName)  throws IOException {
+    public byte[] lengthForDownloadingFile(String fileName)  throws IOException {
         Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
         byte[] data = Files.readAllBytes(path);
         return data;
     }
-
 
 
 
@@ -147,17 +149,18 @@ public class DefaultFilesInfoService implements FilesInfoService {
     @Override
     public void deleteFile(String fileName) {
         log.info("!!!message by DefaultFilesInfoService, method deleteFile!!!");
+
+        //удаляю сведения о файле из БД
         filesInfoRepository.deleteByName(fileName);
 
+        //удаляю с диска сам файл
         Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
-
         //само удаление обязательно оборачивать в "try/catch"
         try {
             Files.delete(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }
