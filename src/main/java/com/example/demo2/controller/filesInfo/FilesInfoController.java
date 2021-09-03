@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,8 +24,11 @@ public class FilesInfoController {
     @Autowired
     private ServletContext servletContext;
 
+    //!!!Исключения в методах и тем более проброс через "throws" я не применяю, т.к. работаю через механизм проверки полей через if-ы и пишу код сам для себя!!!
+
+
     @PostMapping("/upload")
-    public ResponseEntity<?> singleFileUpload(@RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+    public ResponseEntity<?> singleFileUpload(@RequestPart(value = "file", required = false) MultipartFile file) {
         log.info("+++message by FilesInfoController, method singleFileUpload+++ file = " + file);
         if (file.isEmpty()) {
             return ResponseEntity.status(444).body("Not file for download");
@@ -39,12 +41,12 @@ public class FilesInfoController {
     //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
     @GetMapping("/download")
 //    @GetMapping("/download/{fileName}")
-    public ResponseEntity<?> downloadFile(@RequestParam(value = "param1", required = false, defaultValue = "forDownload.doc") String fileName) throws IOException {
-//    public ResponseEntity<?> downloadFile(@PathVariable Optional<String> fileName) throws IOException {
+    public ResponseEntity<?> downloadFile(@RequestParam(value = "param1", required = false, defaultValue = "forDownload.doc") String fileName) {
+//    public ResponseEntity<?> downloadFile(@PathVariable Optional<String> fileName) {
         log.info("+++message by FilesInfoController, method download+++");
         log.info("FilesInfoController: Handling find by fileName: " + fileName);
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName); // создается типа файла, который будет вставляться в тело ответа
-        if (fileName.equals("empty")) {
+        if (filesInfoService.downloadFile(fileName).equals("Not file for download")) {
 //        if (fileName.get().equals("empty")) {
             return ResponseEntity.status(444).body("Not file for download");
         } else {

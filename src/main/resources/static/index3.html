@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="css/index23.css" type="text/css">
+    <title>Основные механизмы</title>
+
+    <script type="text/javascript" src="js/workingWithFiles.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<body onload="loadAllFilesInfo()">
+
+  <div class="container">
+
+    <div class="header">Шапка сайта</div>
+    <div class="nav">
+        <div class="in_nav">
+            <ul class="nav_list">
+                <li class="nav_item">
+                    <a class="link1" href="index.html">
+                        Главная
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a class="link2" href="index2.html">
+                        Поля
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="layout">
+        <div class="col1">
+            <p><a class="link" href="index.html">На главную</a></p>
+            <p><a class="link" href="index2.html">Работа с полями</a></p>
+        </div>
+        <div class="col3">
+            <div class="col31">
+                <h3>Статистика</h3>
+                <p>одиннадцать человек дошли до финала;</p>
+                <p>один человек правильно указал в каком стиле писал Диего Веласкес;</p>
+                <p>только один человек знал, кто изобрел пароход.</p>
+            </div>
+        </div>
+
+        <div class="col2">
+            <div class="col21">
+                <h1>Block for download files</h1>
+                <table id="filesInfoList"></table>
+                <form>
+                    <input id="download_field" placeholder="manual input of file name with extension" size="32">
+                    <input id="button_download_file" type="button" value="push for download">
+                    <script type="text/javascript"> $(function() { $("#button_download_file").click(function () { downloadFile(); }); }); </script>
+
+                    <!--  Р° РІРѕС‚ С‚Р°РєРѕРµ СЃРѕР·РґР°РЅРёРµ РєРЅРѕРїРєРё СЃ РјРµС…Р°РЅРёР·РјРѕРј window.location.assign(РІ С„Р°Р№Р»Рµ "workingWithFields.js") СЂР°Р±РѕС‚Р°РµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ-->
+                </form>
+                <form>
+                    <h2 class="cl1" onclick="downloadFile()"><u>Download file - forDownload.doc</u></h2>
+                </form>
+
+                <h1>Block for upload files</h1>
+                <form>
+                    <input type="file" id="js-file" multiple="multiple" accept=".txt,image/*">
+                    <input id="button_upload_file" type="button" value="push for upload">
+                    <script type="text/javascript"> $(function() { $("#button_upload_file").click(function () { uploadFile(); }); }); </script>
+                    <h3 id="result"></h3>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">&copy; Максим</div>
+  </div>
+
+</body>
+</html>

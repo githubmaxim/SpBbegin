@@ -16,17 +16,18 @@ import static java.util.Objects.isNull;
 @RestController
 @RequestMapping("/users")
 @AllArgsConstructor
-@Slf4j
-//еще есть @Log4j/@Log и т.д. + у них в скобках "()" можно дописывать разные ключи конфигурации. Позволяют выводить логи без создания строки с логером
+@Slf4j  //еще есть @Log4j/@Log и т.д. + у них в скобках "()" можно дописывать разные ключи конфигурации. Позволяют выводить логи без создания строки с логером
 public class UsersController {
 
 //    static final Logger log = LoggerFactory.getLogger(UsersController.class);
 
     private final UsersService usersService;
 
+//!!!Исключения в методах и тем более проброс через "throws" я не применяю, т.к. работаю через механизм проверки полей через if-ы и пишу код сам для себя!!!
+
 
     @GetMapping("/findAll")
-    public List<UsersDto> findAllUsers() {
+    public List<UsersDto> findAllUsers() throws ArithmeticException{
         log.info("+++message by UserController, method findAllUsers+++");
         log.info("UserController: Handling find all users request");
         return usersService.findAll();
@@ -52,17 +53,17 @@ public class UsersController {
     
     // Для другого написания метода saveUsers() в классе DefaultUserService
     //    @PostMapping("/save")
-//    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
+//    public UsersDto saveUsers(@Valid @RequestBody UsersDto usersDto) {
 //        log.info("+++message by UserController, method saveUsers+++");
 //        log.info("UserController: Handling save users: " + usersDto);
 //        return usersService.saveUser(usersDto);
 //    }
     @PostMapping("/save")
     //логика прописана тут, а не в сервисе т.к. на выходе необходимо получать объект ResponseEntity-класса, что делать в сервисе не рекомендуется
-    public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) throws ValidationException {
+    public ResponseEntity<?> saveUsers(@Valid @RequestBody UsersDto usersDto) {
         log.info("+++message by UserController, method saveUsers+++");
         log.info("UserController: Handling save users: " + usersDto);
-        if (!isNull(usersService.findByLogin(usersDto.getLogin()))) { //остальная валидация в проверочных аннотациях на самих переменных в классе "UserDto"
+        if (!isNull(usersService.findByLogin(usersDto.getLogin()))) { //основная валидация находится в файле "workingWithFields.js", кроме того валидация есть в проверочных аннотациях на самих переменных в классе "UserDto"
             return ResponseEntity.status(444).body("Such login is exist");
         } else {
             usersService.saveUser(usersDto);

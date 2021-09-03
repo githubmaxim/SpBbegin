@@ -36,6 +36,8 @@ public class Users {
     @JsonIgnoreProperties("users") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
     private University universities;
 
+
+    //В закомментированном блоке кода в этой сущности, а так же в "City" и "University" показано написание других отношений (а не только @OneToOne)
 //    @ManyToMany(cascade = {CascadeType.PERSIST}) //или CascadeType.MERGE - они аналог "=CascadeType.ALL", только для связи @ManyToMany и @ManyToOne
 //    @JoinTable(name = "Users_University", joinColumns = @JoinColumn(name = "users_id"), inverseJoinColumns = @JoinColumn(name = "university_id"))
 //    @JsonIgnoreProperties("usersList") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON

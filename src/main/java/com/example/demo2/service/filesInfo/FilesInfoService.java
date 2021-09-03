@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface FilesInfoService {
 
-    String singleFileUpload(MultipartFile file) throws IOException;
+    String singleFileUpload(MultipartFile file);
 
-    ByteArrayResource downloadFile(String fileName) throws IOException;
+    Object downloadFile(String fileName);
     HttpHeaders headerForDownloadingFile(String fileName);
-    byte[] lengthForDownloadingFile(String fileName)  throws IOException;
+    byte[] lengthForDownloadingFile(String fileName);
 
     List<String> findAllFilesName();
 

@@ -26,9 +26,10 @@ public class City {
     private String city;
 
     @OneToOne(optional=false, mappedBy="cities")
-//    @JsonIgnoreProperties("cities")
     private University univ;
 
+
+    //В закомментированном блоке кода в этой сущности, а так же в "Users" и "University" показано написание других отношений (а не только @OneToOne)
 //    @OneToMany (mappedBy = "cities")
 //    @JsonIgnoreProperties("cities")
 //    private Set<University> universitySet;

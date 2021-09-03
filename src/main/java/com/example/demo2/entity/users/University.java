@@ -33,7 +33,7 @@ public class University {
     @JsonIgnoreProperties("univ") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
     private City cities;
 
-
+    //В закомментированном блоке кода в этой сущности, а так же в "City" и "Users" показано написание других отношений (а не только @OneToOne)
 //    @ManyToMany(mappedBy = "universities")
 //    @JsonIgnoreProperties("universities")//эта аннотация + такая-же аннотация (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON
 //    private List<Users> usersList;

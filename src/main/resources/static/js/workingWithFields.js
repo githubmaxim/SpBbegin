@@ -14,6 +14,7 @@ function findByLogin() {
     $.ajax({
              type: "GET",
              url: "http://localhost:8080/users/findByLogin?param1="+login,
+//             url: "http://localhost:8080/users/findByLogin?param1=ann",
              contentType: 'application/json',
              success: function( user, textStatus, jqXHR ){
                 let html1 = '<table>' +
@@ -38,10 +39,11 @@ function findByLogin() {
                            '</table>';
 //                          $("#usersList").html(html1);
                             document.getElementById("usersList2").innerHTML = html1;
-                           },
+
+             },
              error: function (jqXHR, exception) {
                             myError(jqXHR, exception);
-                         }
+             }
    });
 }
 
@@ -77,6 +79,7 @@ function loadAllUsers() {
  }
 
 
+
 function deleteUser(userId) {
              $.ajax({
                         type: "DELETE",
@@ -85,8 +88,8 @@ function deleteUser(userId) {
                                myError(jqXHR, exception);
                         }
              });
-
              setTimeout(() => { loadAllUsers(); }, 200);
+             setTimeout(() => { document.getElementById("usersList2").innerHTML = ""; }, 200);
 }
 
 
@@ -125,11 +128,11 @@ function createUser() {
 //           }
 
            if (validateOnSpace(userName)) {alert('remove the space in the "User name" field');
-           } else if (validateLength(userName)) {alert('minimum length "User name" field 3 symbols');
+           } else if (validateLength(userName)) {alert('minimum length "User name" field 2 symbols');
            } else if (!validateFirstSymbol(userName)) {alert('first symbol "User name" field should be a letter');
            } else if (!validateLetterNumeral(userName)) {alert('"User name" field must contain only letters or numbers');
            } else if (validateOnSpace(userLogin)) {alert('remove the space in the "User login" field');
-           } else if (validateLength(userLogin)) {alert('minimum length "User login" field 3 symbols');
+           } else if (validateLength(userLogin)) {alert('minimum length "User login" field 2 symbols');
            } else if (!validateFirstSymbol(userLogin)) {alert('first symbol "User login" field should be a letter');
            } else if (!validateLetterNumeral(userLogin)) {alert('"User login" field must contain only letters or numbers');
            } else if (validateLength(userEmail)) {alert('fill in the "User email" field');
@@ -173,7 +176,7 @@ function validateOnSpace(name) {
 }
 
 function validateLength(name) {
-    return name.length <3;
+    return name.length <2;
 }
 
 function validateFirstSymbol(name) {

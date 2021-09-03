@@ -1,0 +1,140 @@
+/*Чтобы в броузере "Chrome" в "localhost:8080" увидеть изменения внесенные в файлы "*.html, *.js, *.css" необходимо нажать:
+  1. CTRL+SHIFT+DELL  2.CTRL+F5  3.CTRL+SHIFT+R
+*/
+
+   body{
+   min-width: 1100px; /* Минимальная ширина макета, после которой заканчивается маштабирование и начинается скрывание части страницы */
+   }
+
+   .container {
+       width: 90%; /* Ширина макета */
+       margin: 0 auto; /* Выравниваем по центру */
+       background: #FCE600; /* Цвет подложки */
+      }
+
+   .footer { background: #D5BAE4; }
+   .header { font-size: 2.2em; /* Размер текста */
+             text-align: center; /* Выравнивание по центру */
+             padding: 5px; /* Отступы вокруг текста */
+             background: #D71920; /* Цвет фона шапки */
+   }
+   .layout, .nav { overflow: hidden; } /*поскольку шаблон листа резиновый, то нужно четкое указание как отображать внутренние элементы, чтобы на них распространялись параметры родителя */
+   .col1 { background: #0000FF; float: left; width: 200px; }
+   .col2 { background: #54B948; margin: 0 200px 0 200px; padding: 10px;} /* "padding: 10px" расширяет заливку по периметру */
+   .col21 {margin: 0 5px 0 5px; } /* сверху | справа | снизу | слева */
+   .col3 { background: #ECD5DE; width: 200px; float: right; }
+   .col31 { margin: 0 5px 0 5px;}
+
+   .nav {
+      height: 50px;
+      background: #009FFF;
+      position: relative;
+   }
+   .in_nav {
+          margin-left: 20%;
+          margin-top: 18px;
+
+   }
+   .nav_list {
+      list-style-type: none;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 0px;
+   }
+   .nav_item {
+           border-radius: 8px;
+           float: left;
+           list-style-type: none; /* Убираем маркеры */
+   }
+
+   a.link, a.link1, a.link2 {
+                  color: white;
+                  text-align: center; /* Выравнивание по центру */
+                  padding: 5px; /* Отступы вокруг текста */
+                  text-decoration: none; /* Отменяем подчеркивание у ссылки */
+   }
+   a.link { margin-left: 10px; /* Делаем дополнительный отступ слева */
+          font-size: 1.0em;
+   }
+   a.link1 { margin-left: 50px; /* Делаем дополнительный отступ слева */
+           font-size: 1.2em;
+   }
+   a.link2 { margin-left: 30px; /* Делаем дополнительный отступ слева */
+           font-size: 1.2em;
+   }
+
+   a.link:hover, a.link1:hover, a.link2:hover {
+                                   font-family: Arial, Verdana, sans-serif;
+                                   text-align: left;
+   }
+   a.link:hover {font-size: 92%;}
+   a.link1:hover, a.link2:hover {font-size: 108%;}
+
+   a.link:active, a.link1:active, a.link2:active {
+                                    font-family: Arial, Verdana, sans-serif;
+                                    text-align: left;
+   }
+   a.link:active {font-size: 85%;}
+   a.link1:active, a.link2:active {font-size: 100%;}
+
+   form {
+     margin: 2px;
+   }
+
+   table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+   }
+
+   td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+   }
+
+   tr:nth-child(even) {
+            background-color: #dddddd;
+   }
+   h1 {
+          color: #cd66cc;
+          font-size: 120%;
+          font-family: Arial, Verdana, sans-serif;
+          text-align: left;
+          <!--далее обнуляем установки броузера, установленные для этого элемента, по умолчанию-->
+          margin-block-start: auto;
+          margin-block-end: 0em;
+   }
+
+   h2 {
+             font-size: 100%;
+             font-family: Arial, Verdana, sans-serif;
+             text-align: left;
+   }
+
+   .cl1 {cursor: pointer;}
+
+   h2.cl1 {
+           color: blue;
+           font-size: 85%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+           /*следующими 2-мя строками я добивался, чтобы сработала нижняя*/
+           position:relative;
+           z-index: 2;
+           cursor:pointer; /*при наведении на элемент вид курсорсора  становился "рукой"*/
+
+   }
+   h2.cl1:hover {
+           font-size: 85%;
+           font-family: Arial, Verdana, sans-serif;
+           text-align: left;
+           color: green;
+   }
+   h2.cl1:active {
+             font-size: 80%;
+             font-family: Arial, Verdana, sans-serif;
+             text-align: left;
+   }

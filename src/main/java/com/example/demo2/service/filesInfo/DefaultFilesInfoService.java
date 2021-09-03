@@ -34,7 +34,7 @@ public class DefaultFilesInfoService implements FilesInfoService {
 
 
     @Override
-    public String singleFileUpload(MultipartFile file) throws IOException {
+    public String singleFileUpload(MultipartFile file) {
         log.info("!!!message by DefaultUserService, method singleFileUpload!!!");
         try {
 
@@ -77,15 +77,28 @@ public class DefaultFilesInfoService implements FilesInfoService {
     }
 
 
+//    if (Files.notExists(Paths.get(MY_DIRECTORY + "/" + fileName))) {}
+
     //Следующие три метода для формирования ответа клиенту на запрос о загрузке файла
     @Override
-    public ByteArrayResource downloadFile(String fileName) throws IOException {
+    public Object downloadFile(String fileName) {
 //   В следующем блоке кода используется механизмы "NIO 2" + "IO". Тут файл перед передачей разрывается на байты.
-        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
-        byte[] data = Files.readAllBytes(path);
-        ByteArrayResource resource = new ByteArrayResource(data);
+        if (Files.notExists(Paths.get(MY_DIRECTORY + "/" + fileName))) {
+            log.error("!message by DefaultUserService, method downloadFile!" + "- Not file for download");
+            String resource = "Not file for download";
+            return resource;
+        } else {
 
-        return resource;
+            Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
+            byte[] data = new byte[0];
+            try {
+                data = Files.readAllBytes(path);
+            } catch (IOException e) {
+                log.error("!message by DefaultUserService, method downloadFile!", e);
+            }
+            ByteArrayResource resource = new ByteArrayResource(data);
+            return resource;
+        }
     }
     @Override
     public HttpHeaders headerForDownloadingFile(String fileName) {
@@ -99,10 +112,15 @@ public class DefaultFilesInfoService implements FilesInfoService {
         return headers;
     }
     @Override
-    public byte[] lengthForDownloadingFile(String fileName)  throws IOException {
-        Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
-        byte[] data = Files.readAllBytes(path);
-        return data;
+    public byte[] lengthForDownloadingFile(String fileName) {
+            Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
+            byte[] data = new byte[0];
+            try {
+                data = Files.readAllBytes(path);
+            } catch (IOException e) {
+                log.error("!message by DefaultUserService, method lengthForDownloadingFile!", e);
+            }
+            return data;
     }
 
 

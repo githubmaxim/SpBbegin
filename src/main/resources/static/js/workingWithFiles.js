@@ -46,8 +46,9 @@ function deleteFileInfo(fileName) {
 //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
 function downloadFile() {
     let fileName = $("#download_field").val();
-    if(fileName.length < 3) {
-         window.location.assign("http://localhost:8080/filesInfo/download?param1=empty");
+    if(fileName.length < 4) {
+    alert('minimum length "file name with extension" field 4 symbols');
+//         window.location.assign("http://localhost:8080/filesInfo/download?param1=empty");
 //         window.location.assign("http://localhost:8080/users/download/empty");
 
     } else {

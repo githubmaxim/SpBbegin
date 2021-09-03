@@ -58,10 +58,10 @@
 <!--        </encoder>-->
 <!--    </appender>-->
 
-<!--    <logger name="com.example.demo2.controller" additivity="false" level="INFO"> &lt;!&ndash; "level="INFO" это (3-й уровень урезания уровня вывода)&ndash;&gt;-->
+<!--    <logger name="com.example.demo2.controller" additivity="false" level="INFO"> &lt;!&ndash; "level="INFO" это (3-й уровень урезания уровня вывода), а "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)&ndash;&gt;-->
 <!--        <appender-ref ref="FILECONTROLLER" />-->
 <!--    </logger>-->
-<!--    <logger name="com.example.demo2.service" additivity="false" level="INFO">-->
+<!--    <logger name="com.example.demo2.service" additivity="false" level="INFO"> &lt;!&ndash;тут "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)&ndash;&gt;-->
 <!--            <appender-ref ref="FILESERVICE" />-->
 <!--            <appender-ref ref="STDOUT" />-->
 <!--    </logger>-->
