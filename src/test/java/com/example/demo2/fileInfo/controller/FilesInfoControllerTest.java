@@ -82,7 +82,8 @@ public class FilesInfoControllerTest {
 
     @Test
     void downloadFileIsEmpty() throws Exception {
-        mockMvc.perform(get("/filesInfo/download?param1={param}", "empty")) //имя могу вводить любое, заглушка все равно вернет имя "test_name"
+        when(filesInfoService.downloadFile(any())).thenReturn("Not file for download");
+        mockMvc.perform(get("/filesInfo/download?param1={param}", "chtougodno"))
                 .andDo(print())
                 .andExpect(status().is(444))
                 .andExpect(jsonPath("$").value("Not file for download"));
@@ -116,7 +117,7 @@ public class FilesInfoControllerTest {
         when(filesInfoService.headerForDownloadingFile(any())).thenReturn(headers);
         when(filesInfoService.lengthForDownloadingFile(any())).thenReturn(data);
 
-        mockMvc.perform(get("/filesInfo/download?param1={param}", "forDownload.txt")) //имя могу вводить любое, заглушка все равно вернет имя "test_name"
+        mockMvc.perform(get("/filesInfo/download?param1={param}", "forDownload.txt"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().bytes(data));

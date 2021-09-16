@@ -33,7 +33,7 @@
    .in_nav {
           margin-left: 20%;
           margin-top: 18px;
-
+          float: left;
    }
    .nav_list {
       list-style-type: none;
@@ -44,10 +44,19 @@
       padding-inline-start: 0px;
    }
    .nav_item {
-           border-radius: 8px;
+           border-radius: 8px; /* Скругление уголков */
            float: left;
            list-style-type: none; /* Убираем маркеры */
    }
+
+   .key {
+           float: right;
+           position: relative;
+           right: 15px;
+           bottom: 9px;
+   }
+
+
 
    a.link, a.link1, a.link2 {
                   color: white;

@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Основные механизмы</title>
+</head>
+
+<body>
+
+<!--следующий блок кода проверяет на наличие и при наличие выводит поле "message"-->
+<div th:text="${message}" style="margin:10px; color:red"></div>
+<div style="margin:5px; color:blue">Add new user</div>
+<!--Писать <form> для запуска необходимого метода контроллера с передачей ему информации с листа, при использовании Thymeleaf, нужно именно так-->
+    <form action="#" th:action="@{/registration}" th:object="${registration}" method="post">
+        <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div><input type="submit" value="Sign In"/></div>
+    </form>
+<div style="margin:10px;"><a href="/">log off</a></div>
+</body>
+</html>

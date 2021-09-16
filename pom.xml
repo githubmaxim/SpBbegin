@@ -64,8 +64,13 @@
             <version>1.15</version>
         </dependency>
 
-       <!--Дополнительная БД для подключения при тестировании в файле "UsersRepositoryTest.java" (показывается механизм
-       использования дополнительного (а не основного application.properties) файла свойств со своими настройками) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--Дополнительная БД для подключения при тестировании в файле "UsersRepositoryTest.java" (показывается механизм
+        использования дополнительного (а не основного application.properties) файла свойств со своими настройками) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

@@ -47,7 +47,6 @@ public class FilesInfoController {
         log.info("FilesInfoController: Handling find by fileName: " + fileName);
         MediaType mediaType = MediaTypeUtils.getMediaTypeForFileName(this.servletContext, fileName); // создается типа файла, который будет вставляться в тело ответа
         if (filesInfoService.downloadFile(fileName).equals("Not file for download")) {
-//        if (fileName.get().equals("empty")) {
             return ResponseEntity.status(444).body("Not file for download");
         } else {
             return ResponseEntity
