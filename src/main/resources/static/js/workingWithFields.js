@@ -1,5 +1,5 @@
-//Для всех кнопок используем вариант привязки Функций к кнопкам "<button onclick=" в файле *.html.
-//Возможно написание через "$( document ).ready(function(){ $( "button" ).click(function(){---}" в файле *.js. - у меня не получился!
+//Для всех кнопок на html-листе используем вариант написание через "<script type="text/javascript">$( document ).ready(function(){ $( "button" ).click(function(){---}; </script>".
+//Возможно написание привязки функций к кнопкам через "<button onclick=" в файле *.html., но при таком написании функции которые принимают с html-страницы данные выполняются на сервере с первого раза, а клиент получает ответ только со второго раза (а дальше нормально). При этом сервер сработает у себя все разы.
 
 //Чтобы в броузере "Chrome" в "localhost:8080" увидеть изменения внесенные в файлы "*.html, *.js, *.css" необходимо нажать:
 //1. CTRL+SHIFT+DELL  2.CTRL+F5  3.CTRL+SHIFT+R
@@ -106,7 +106,7 @@ function createUser() {
                     name: userName,
                     login: userLogin,
                     email: userEmail,
-                    universities: { name: userUniversityName,   // "{ -- }" так формируются данные если поле это одиночное значение, а не коллекция как вариант ниже
+                    universities: { name: userUniversityName,   // "{ -- }" так формируются данные если поле это одиночное значение, а не коллекция как заккоментированный вариант ниже
                                     cities: {city: userUniversityCity}
                      }
            }

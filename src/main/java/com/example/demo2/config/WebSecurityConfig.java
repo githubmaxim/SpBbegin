@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,8 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+//!!!Отключил защиту "csrf" т.к. не смог ее настроить на разарешения работы для методов POST,PUT,DELETE!!!
+//Можно все передавать через разрешенный метод GET, но в нем вся инфа передается в URl, а не в теле запроса
+
 @EnableWebSecurity
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true) //это + еще в файле AdminController.java нужно над классом дописать "@PreAuthorize("hasAuthority('ADMIN')")" , для запуска механизма допуска к методам данного контроллера только с ролью "ADMIN'  при нашем "auth.jdbcAuthentication()" (вместо стандартных ".antMatchers("/admin/**").hasRole("ADMIN")" при "auth.inMemoryAuthentication()")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
@@ -24,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+//                    .antMatchers("/admin/put/**").hasRole("ADMIN")
                     .antMatchers("/", "/registration").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -32,7 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .defaultSuccessUrl("/index.html", true)
                     .and()
                 .logout()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                .csrf().disable();
     }
 
 

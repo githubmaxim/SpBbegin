@@ -26,4 +26,9 @@ public class LogPas {
     @CollectionTable(name = "logpass_role", joinColumns = @JoinColumn(name = "logpass_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public boolean getActive() { return active; }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
