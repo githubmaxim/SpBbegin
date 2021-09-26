@@ -77,6 +77,22 @@
                 <h1>Block for search all Users</h1>
                 <input id="button_load_all_users" type="button" value="load all Users">
                 <script type="text/javascript"> $(function() { $("#button_load_all_users").click(function () { loadAllUsers(); }); }); </script>
+
+                <h1>Block for sending by form-method</h1>
+
+                <form id="form">
+                    <div>
+                        <label>Number</label>
+                        <input type="text" name="number">
+                    </div>
+                    <div>
+                        <label>Word</label>
+                        <input type="text" name="word">
+                    </div>
+                    <input id="button_form" type="submit" name="send" value="Отправить">
+                    <script type="text/javascript"> $(function() { $("#button_form").click(function () { form(); }); }); </script>
+                </form>
+                <div id="message1"></div>
             </div>
         </div>
 

@@ -5,7 +5,9 @@ import com.example.demo2.exception.users.ValidationException;
 import com.example.demo2.service.users.UsersService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -69,6 +71,14 @@ public class UsersController {
             usersService.saveUser(usersDto);
             return ResponseEntity.status(200).body("User created");
         }
+    }
+
+    @PostMapping(value ="/form", produces = {"application/json", "application/xml"}, consumes = {"application/x-www-form-urlencoded"})
+    public @ResponseBody  String form(ForForm form) { //форма отправляет тип  "application/x-www-form-urlencoded" , но Spring не понимает его как RequestBody. Поэтому мы должны удалить аннотацию @RequestBody(из скобок) и добавить @ResponseBody после "public".
+//    public @ResponseBody  ResponseEntity<?> form(ForForm form) { //форма отправляет тип  "application/x-www-form-urlencoded" , но Spring не понимает его как RequestBody. Поэтому мы должны удалить аннотацию @RequestBody(из скобок) и добавить @ResponseBody после "public".
+        log.info("+++message by UserController, method form+++");
+        log.info("number="+form.getNumber()+", word="+form.getWord());
+        return "You sended by form-method: number="+form.getNumber()+", word="+form.getWord();
     }
 }
 

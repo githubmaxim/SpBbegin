@@ -69,6 +69,7 @@ function deleteLogPas(userId) {
 
 function changeRoleLogPas(userId) {
         let logpas = $("#role"+userId).val();
+
         $.ajax({
                         type: "PUT",
                         url: "http://localhost:8080/admin/put/" + userId,

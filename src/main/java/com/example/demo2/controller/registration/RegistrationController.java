@@ -6,6 +6,7 @@ import com.example.demo2.repository.registration.RegistrationRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,9 @@ public class RegistrationController {
 
     @Autowired
     private RegistrationRepository registrationRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String indexHtml() {
@@ -57,6 +61,7 @@ public class RegistrationController {
 
         logPas.setActive(true);
         logPas.setRoles(Collections.singleton(Role.USER));
+        logPas.setPassword(passwordEncoder.encode(logPas.getPassword()));
         registrationRepository.save(logPas);
 
         return "redirect:/login";
