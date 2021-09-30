@@ -22,6 +22,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Service file that serves the functions of the "FilesInfoController" class.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Service
 @Builder
 @Slf4j
@@ -32,7 +38,11 @@ public class DefaultFilesInfoService implements FilesInfoService {
     private final FilesInfoConverter filesInfoConverter;
 
 
-
+    /**
+     * Method uploads a client file to the server and information about it into the “FilesInfo” entity.
+     * @param file file uploading to the server
+     * @return text
+     */
     @Override
     public String singleFileUpload(MultipartFile file) {
         log.info("!!!message by DefaultUserService, method singleFileUpload!!!");
@@ -71,15 +81,24 @@ public class DefaultFilesInfoService implements FilesInfoService {
         }
     }
 
-    // Метод для генерации ключей
+    // Метод генерации ключей для метода "singleFileUpload"
+    /**
+     * Method for generating keys for the "singleFileUpload" method
+     * @param name file name
+     * @return generated key
+     */
     private String generateKey(String name) {
         return DigestUtils.md2Hex(name + LocalDate.now().toString());
     }
 
 
-//    if (Files.notExists(Paths.get(MY_DIRECTORY + "/" + fileName))) {}
-
     //Следующие три метода для формирования ответа клиенту на запрос о загрузке файла
+
+    /**
+     * Method sends the file requested by the client
+     * @param fileName file name
+     * @return file requested by the client
+     */
     @Override
     public Object downloadFile(String fileName) {
 //   В следующем блоке кода используется механизмы "NIO 2" + "IO". Тут файл перед передачей разрывается на байты.
@@ -100,6 +119,12 @@ public class DefaultFilesInfoService implements FilesInfoService {
             return resource;
         }
     }
+
+    /**
+     * Method generates “Header”
+     * @param fileName file name
+     * @return generated "Header"
+     */
     @Override
     public HttpHeaders headerForDownloadingFile(String fileName) {
         Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
@@ -111,6 +136,12 @@ public class DefaultFilesInfoService implements FilesInfoService {
         headers.add("Expires", "0");
         return headers;
     }
+
+    /**
+     * Method sends the file length requested by the client
+     * @param fileName file name
+     * @return file length in bytes
+     */
     @Override
     public byte[] lengthForDownloadingFile(String fileName) {
             Path path = Paths.get(MY_DIRECTORY + "/" + fileName);
@@ -149,6 +180,10 @@ public class DefaultFilesInfoService implements FilesInfoService {
 //
 //        return responseEntity;
 
+    /**
+     * Method, from the "FilesInfo" entity, displays all information about the files on the disk
+     * @return all data from entity "FilesInfo"
+     */
     @Override
     public List<String> findAllFilesName() {
 
@@ -164,6 +199,10 @@ public class DefaultFilesInfoService implements FilesInfoService {
         return filesInfoDtoList;
     }
 
+    /**
+     * Method removes a file from disk and information about it from the “FilesInfo” entity
+     * @param fileName name of the file to be deleted on the server
+     */
     @Override
     public void deleteFile(String fileName) {
         log.info("!!!message by DefaultFilesInfoService, method deleteFile!!!");

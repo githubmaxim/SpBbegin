@@ -6,10 +6,22 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * File for converting the entity class “FilesInfo” to the class “FilesInfoDto” and vice versa.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Component
 @NoArgsConstructor
 @Builder
 public class FilesInfoConverter {
+
+    /**
+     * A method that converts the "FilesInfoDto" class into the "FilesInfo" entity class
+     * @param filesInfoDto object of the class "FilesInfoDto"
+     * @return object of the entity class "FilesInfo"
+     */
     public FilesInfo fromFilesInfoDtoToFilesInfo(FilesInfoDto filesInfoDto) { //обычное заполнение, не через сеттеры
        return FilesInfo.builder()
        .id(filesInfoDto.getId())
@@ -29,6 +41,11 @@ public class FilesInfoConverter {
 //        return filesInfo;
     }
 
+    /**
+     * A method that converts the "FilesInfo" entity class into the "FilesInfoDto" class
+     * @param filesInfo object of the entity class "FilesInfo"
+     * @return object of the class "FilesInfoDto"
+     */
     public FilesInfoDto fromFilesInfoToFilesInfoDto(FilesInfo filesInfo) { //заполнение через Builder
         return FilesInfoDto.builder()
                 .id(filesInfo.getId())

@@ -9,6 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Interface with method templates for the “DefaultUsersService” class.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 public interface UsersService {
 
 //    UsersDto saveUser(UsersDto usersDto) throws ValidationException;

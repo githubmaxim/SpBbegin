@@ -9,6 +9,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * A subordinate entity of the “University” entity.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Entity
 @Table(name = "city")
 @NoArgsConstructor
@@ -23,8 +29,14 @@ public class City {
     @GeneratedValue
     private Integer id;
 
+    /**
+     * city name
+     */
     private String city;
 
+    /**
+     * field of connection with the entity "University"
+     */
     @OneToOne(optional=false, mappedBy="cities")
     private University univ;
 

@@ -8,6 +8,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * A subordinate entity of the “User” entity.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Entity
 @Table(name = "university")
 @NoArgsConstructor
@@ -22,12 +28,21 @@ public class University {
     @GeneratedValue
     private Integer id;
 
+    /**
+     * university name
+     */
     private String name;
 
+    /**
+     * field of connection with the entity "Users"
+     */
     @OneToOne(optional=false, mappedBy="universities")
 //    @JsonIgnoreProperties("universities")
     private Users users;
 
+    /**
+     * field of connection with the entity "City"
+     */
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "city_id")
     @JsonIgnoreProperties("univ") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON

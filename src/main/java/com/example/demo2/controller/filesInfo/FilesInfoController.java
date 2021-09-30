@@ -13,6 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.util.List;
 
+/**
+ * The Controller file that serves the functions of the "workingWithFiles.js" file used on the "workingWithFiles.html" page.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/filesInfo")
 @AllArgsConstructor
@@ -26,7 +32,11 @@ public class FilesInfoController {
 
     //!!!Исключения в методах и тем более проброс через "throws" я не применяю, т.к. работаю через механизм проверки полей через if-ы и пишу код сам для себя!!!
 
-
+    /**
+     * This method is used to run the "singleFileUpload()" class "DefaultFilesInfoService"(interface "FilesInfoService") method.
+     * @param file file uploading to the server
+     * @return status "200"|"444" and "file uploaded"or"Error"|"Not file for download"
+     */
     @PostMapping("/upload")
     public ResponseEntity<?> singleFileUpload(@RequestPart(value = "file", required = false) MultipartFile file) {
         log.info("+++message by FilesInfoController, method singleFileUpload+++ file = " + file);
@@ -39,6 +49,12 @@ public class FilesInfoController {
 
 
     //Тут два варианта написания для получения параметра: через @RequestParam или @PathVariable
+
+    /**
+     * This method is used to run the "downloadFile()" class "DefaultFilesInfoService"(interface "FilesInfoService") method.
+     * @param fileName name of the file downloading from the server
+     * @return status "200"|"444" and  downloading file|"Not file for download"
+     */
     @GetMapping("/download")
 //    @GetMapping("/download/{fileName}")
     public ResponseEntity<?> downloadFile(@RequestParam(value = "param1", required = false, defaultValue = "forDownload.doc") String fileName) {
@@ -58,7 +74,10 @@ public class FilesInfoController {
         }
     }
 
-
+    /**
+     * This method is used to run the "findAllFilesName()" class "DefaultFilesInfoService"(interface "FilesInfoService") method.
+     * @return all data from entity "FilesInfo"
+     */
     @GetMapping("/findAllFilesName")
     public List<String> findAllFilesName() {
         log.info("+++message by FilesInfoController, method findAllFilesName+++");
@@ -66,12 +85,17 @@ public class FilesInfoController {
         return filesInfoService.findAllFilesName();
     }
 
+    /**
+     * This method is used to run the "deleteFile()" class "DefaultFilesInfoService"(interface "FilesInfoService") method.
+     * @param fileName name of the file to be deleted on the server
+     * @return status "200"
+     */
     @DeleteMapping("/delete/{fileName}")
     public ResponseEntity<Void> deleteFile(@PathVariable String fileName) {
         log.info("+++message by UserController, method deleteUsers+++");
         log.info("UserController: Handling delete user request: " + fileName);
         filesInfoService.deleteFile(fileName);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(200).build();
     }
 
 }

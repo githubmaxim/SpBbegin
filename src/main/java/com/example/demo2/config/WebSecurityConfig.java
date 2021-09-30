@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
@@ -19,6 +17,12 @@ import javax.sql.DataSource;
 //!!!Отключил защиту "csrf" т.к. не смог ее настроить на разарешения работы для методов POST,PUT,DELETE!!!
 //Можно все передавать через разрешенный метод GET, но в нем вся инфа передается в URl, а не в теле запроса
 
+/**
+ * Spring security configuration class.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true) //это + еще в файле AdminController.java нужно над классом дописать "@PreAuthorize("hasAuthority('ADMIN')")" , для запуска механизма допуска к методам данного контроллера только с ролью "ADMIN'  при нашем "auth.jdbcAuthentication()" (вместо стандартных ".antMatchers("/admin/**").hasRole("ADMIN")" при "auth.inMemoryAuthentication()")
@@ -26,19 +30,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    //Добавляем кодирование паролей
     @Bean
     public PasswordEncoder getPasswordEncoder(){
         return new  BCryptPasswordEncoder(8);
     }
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * This method is used for authorization.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                    .antMatchers("/admin/put/**").hasRole("ADMIN")
                     .antMatchers("/", "/registration").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -52,10 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-
+    /**
+     * This method is used for authorization.
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder)
@@ -63,7 +74,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select lp.username, lpr.roles from logpas lp inner join logpass_role lpr on lp.id = lpr.logpass_id where lp.username=?");
     }
 
-//    Блок позволяющий подгружать на html-страницы, до прохождения аутентификации, файлы из этих папок
+//    Метод позволяющий подгружать на html-страницы файлы из перечисленных папок, до прохождения аутентификации
+    /**
+     * This method allows you to upload files from the listed folders to html pages before passing authentication.
+     * @param web
+     */
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(

@@ -25,7 +25,6 @@ function loadAllLogPas() {
                             let htmlAll = '<th>Id</th>\n' +
                                           '<th>Username</th>\n' +
                                           '<th>Password</th>\n' +
-//                                          '<th>Active</th>\n' +
                                           '<th>Role</th>\n' +
                                           '<th>Change Role</th>\n' +
                                           '<th>Change</th>\n' +
@@ -35,7 +34,6 @@ function loadAllLogPas() {
                                             '<td>' + user.id + '</td>\n' +
                                             '<td>' + user.username + '</td>\n' +
                                             '<td>' + user.password + '</td>\n' +
-//                                            '<td>' + user.active + '</td>\n' +
                                             '<td>' + user.roles + '</td>\n' +
                                             '<td><select id="role' + user.id + '" name="select" required><option></option><option value="ADMIN">ADMIN</option><option value="USER">USER</option></select></td>\n' +
                                             '<td><button onclick="changeRoleLogPas(' + user.id + ')">Change Role</button></td>' +

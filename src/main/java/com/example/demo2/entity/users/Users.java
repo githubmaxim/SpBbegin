@@ -9,6 +9,12 @@ import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The main entity for storing information that is entered by the client on the “workingWithFields.html” sheet.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -27,10 +33,24 @@ public class Users {
     @GeneratedValue
     private Integer id;
 
+    /**
+     * user name
+     */
     private String name;
+
+    /**
+     * user login
+     */
     private String login;
+
+    /**
+     * user email
+     */
     private String email;
 
+    /**
+     * field of connection with the entity "University"
+     */
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true) //для связи @OneToOne, "orphanRemoval = true" для удаления дочерней таблицы при удалении или отсоединении родительской
     @JoinColumn(name = "university_id")
     @JsonIgnoreProperties("users") //эта аннотация + такая-же аннотация в дочерней сущности (с обратной ссылкой) в связанной сущности разрывают циклическую ссылку в работе JSON

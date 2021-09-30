@@ -6,11 +6,22 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * File for converting the entity class “Users” to the class “UsersDto” and vice versa.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Component
 @NoArgsConstructor
 @Builder
 public class UsersConverter {
 
+    /**
+     * A method that converts the "UsersDto" class into the "Users" entity class
+     * @param usersDto object of the class "UsersDto"
+     * @return object of the entity class "Users"
+     */
     public Users fromUsersDtoToUsers(UsersDto usersDto) { //обычное заполнение, не через сеттеры
         Users users = new Users();
         users.setId(usersDto.getId());
@@ -21,6 +32,11 @@ public class UsersConverter {
         return users;
     }
 
+    /**
+     * A method that converts the "Users" entity class into the "UsersDto" class
+     * @param users object of the entity class "Users"
+     * @return object of the class "UsersDto"
+     */
     public UsersDto fromUsersToUsersDto(Users users) { //заполнение через Builder
         return UsersDto.builder()
                 .id(users.getId())
