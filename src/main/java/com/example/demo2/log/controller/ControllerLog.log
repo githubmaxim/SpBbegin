@@ -1,0 +1,44 @@
+15:19:47.614 [background-preinit]   [34mINFO [0;39m o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+15:19:47.630 [main]                 [34mINFO [0;39m com.example.demo2.Application - Starting Application using Java 10.0.2 on My-PC with PID 4632 (D:\Java\Project IDEA\demo2\target\classes started by Макс in D:\Java\Project IDEA\demo2)
+15:19:47.630 [main]                 [34mINFO [0;39m com.example.demo2.Application - No active profile set, falling back to default profiles: default
+15:19:48.129 [background-preinit]   [31mWARN [0;39m o.s.h.c.j.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+15:19:48.550 [main]                 [34mINFO [0;39m o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+15:19:48.613 [main]                 [34mINFO [0;39m o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 6 JPA repository interfaces.
+15:19:49.034 [main]                 [34mINFO [0;39m o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2da66a44' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:19:49.034 [main]                 [34mINFO [0;39m o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:19:49.393 [main]                 [34mINFO [0;39m o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 443 (https)
+15:19:49.408 [main]                 [34mINFO [0;39m o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-443"]
+15:19:49.408 [main]                 [34mINFO [0;39m o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:19:49.408 [main]                 [34mINFO [0;39m o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.46]
+15:19:49.533 [main]                 [34mINFO [0;39m o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:19:49.533 [main]                 [34mINFO [0;39m o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1809 ms
+15:19:49.720 [main]                 [34mINFO [0;39m o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+15:19:49.736 [main]                 [34mINFO [0;39m com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+15:19:50.017 [main]                 [34mINFO [0;39m com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+15:19:50.064 [main]                 [34mINFO [0;39m o.f.c.i.database.base.DatabaseType - Database: jdbc:mysql://localhost:3306/forflyway (MySQL 8.0)
+15:19:50.110 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.021s)
+15:19:50.110 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbMigrate - Current version of schema `forflyway`: 2
+15:19:50.126 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbMigrate - Schema `forflyway` is up to date. No migration necessary.
+15:19:50.204 [main]                 [34mINFO [0;39m o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+15:19:50.235 [main]                 [34mINFO [0;39m org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.31.Final
+15:19:50.376 [main]                 [34mINFO [0;39m o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+15:19:50.469 [main]                 [34mINFO [0;39m org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+15:19:51.187 [main]                 [34mINFO [0;39m o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+15:19:51.202 [main]                 [34mINFO [0;39m o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+15:19:51.249 [main]                 [31mWARN [0;39m o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15:19:52.107 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/css/**'] with []
+15:19:52.107 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/js/**'] with []
+15:19:52.107 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/fonts/**'] with []
+15:19:52.107 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/images/**'] with []
+15:19:52.138 [main]                 [34mINFO [0;39m o.s.s.w.a.c.ChannelProcessingFilter - Validated configuration attributes
+15:19:52.138 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.access.channel.ChannelProcessingFilter@dd3e1e3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f6a5cc9, org.springframework.security.web.context.SecurityContextPersistenceFilter@3b28ab9b, org.springframework.security.web.header.HeaderWriterFilter@7e5e7753, org.springframework.security.web.authentication.logout.LogoutFilter@36ec4071, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7878459f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@278cbf5a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2fca9fae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5d24703e, org.springframework.security.web.session.SessionManagementFilter@395115ac, org.springframework.security.web.access.ExceptionTranslationFilter@2571bdf4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6dde913e]
+15:19:52.372 [main]                 [34mINFO [0;39m o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+15:19:52.544 [main]                 [34mINFO [0;39m o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 09a44eca-4334-4f55-a959-d9f7c003ab94
+
+15:19:52.544 [main]                 [34mINFO [0;39m o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-443"]
+15:19:52.996 [main]                 [34mINFO [0;39m o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 443 (https) with context path ''
+15:19:53.012 [main]                 [34mINFO [0;39m com.example.demo2.Application - Started Application in 5.935 seconds (JVM running for 6.465)
+15:19:53.012 [main]                 [34mINFO [0;39m o.s.b.a.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
+15:19:53.012 [main]                 [34mINFO [0;39m o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC

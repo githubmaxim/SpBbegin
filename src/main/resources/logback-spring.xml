@@ -12,65 +12,65 @@
         </encoder>
     </appender>
 
-<!--    <appender name = "FILE" class = "ch.qos.logback.core.FileAppender">-->
-<!--        <File>mylog.log</File>--> <!-- файл в папке src -->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> &lt;!&ndash;отбрасывает все события ниже указанного уровня&ndash;&gt;-->
-<!--            <level>WARN</level>-->
-<!--        </filter>-->
-<!--        <encoder>-->
-<!--            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <appender name = "FILE" class = "ch.qos.logback.core.FileAppender">
+        <File>mylog.log</File> <!-- файл в папке src -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <!--отбрасывает все события ниже указанного уровня-->
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-<!--    <appender name = "FILECONTROLLER" class = "ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <File>D:/Java/Project IDEA/demo2/src/main/java/com/example/demo2/log/controller/ControllerLog.log</File> &lt;!&ndash;обязательно писать через обратный слеш "/"&ndash;&gt;-->
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
-<!--            &lt;!&ndash; ежедневный ролловер &ndash;&gt;-->
-<!--            <fileNamePattern>ControllerLog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
-<!--            &lt;!&ndash; Каждый файл должен быть не более 10 МБ, хранить историю за 60 дней, но не более 1 ГБ. Причем-->
-<!--            каждый раз, когда текущий файл журнала достигает значения maxFileSize до окончания текущего периода времени, он-->
-<!--            будет архивироваться с возрастающим индексом, начиная с 0.&ndash;&gt;-->
-<!--            <maxFileSize>10MB</maxFileSize>-->
-<!--            <maxHistory>60</maxHistory>-->
-<!--            <totalSizeCap>1GB</totalSizeCap>-->
-<!--        </rollingPolicy>-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> &lt;!&ndash;отбрасывает все события ниже указанного уровня&ndash;&gt;-->
-<!--            <level>INFO</level>-->
-<!--        </filter>-->
-<!--        <encoder>-->
-<!--            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <appender name = "FILECONTROLLER" class = "ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>D:/Java/Project IDEA/demo2/src/main/java/com/example/demo2/log/controller/ControllerLog.log</File> <!--обязательно писать через обратный слеш "/"-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- ежедневный ролловер -->
+            <fileNamePattern>ControllerLog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- Каждый файл должен быть не более 10 МБ, хранить историю за 60 дней, но не более 1 ГБ. Причем
+            каждый раз, когда текущий файл журнала достигает значения maxFileSize до окончания текущего периода времени, он
+            будет архивироваться с возрастающим индексом, начиная с 0.-->
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <!--отбрасывает все события ниже указанного уровня-->
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-<!--    <appender name = "FILESERVICE" class = "ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <File>D:/Java/Project IDEA/demo2/src/main/java/com/example/demo2/log/service/ServiceLog.log</File> &lt;!&ndash;обязательно писать через обратный слеш "/"&ndash;&gt;-->
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
-<!--            <fileNamePattern>ServiceLog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
-<!--            <maxFileSize>10MB</maxFileSize>-->
-<!--            <maxHistory>60</maxHistory>-->
-<!--            <totalSizeCap>1GB</totalSizeCap>-->
-<!--        </rollingPolicy>-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> &lt;!&ndash;отбрасывает все события ниже указанного уровня&ndash;&gt;-->
-<!--            <level>INFO</level>-->
-<!--        </filter>-->
-<!--        <encoder>-->
-<!--            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+    <appender name = "FILESERVICE" class = "ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>D:/Java/Project IDEA/demo2/src/main/java/com/example/demo2/log/service/ServiceLog.log</File> <!--обязательно писать через обратный слеш "/"-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>ServiceLog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <!--отбрасывает все события ниже указанного уровня-->
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%-35(%d{HH:mm:ss.SSS} [%thread]) %highlight(%-5level) %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-<!--    <logger name="com.example.demo2.controller" additivity="false" level="INFO"> &lt;!&ndash; "level="INFO" это (3-й уровень урезания уровня вывода), а "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)&ndash;&gt;-->
-<!--        <appender-ref ref="FILECONTROLLER" />-->
-<!--    </logger>-->
-<!--    <logger name="com.example.demo2.service" additivity="false" level="INFO"> &lt;!&ndash;тут "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)&ndash;&gt;-->
-<!--            <appender-ref ref="FILESERVICE" />-->
-<!--            <appender-ref ref="STDOUT" />-->
-<!--    </logger>-->
+    <logger name="com.example.demo2.controller" additivity="false" level="INFO"> <!-- "level="INFO" это (3-й уровень урезания уровня вывода), а "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)-->
+        <appender-ref ref="FILECONTROLLER" />
+    </logger>
+    <logger name="com.example.demo2.service" additivity="false" level="INFO"> <!--тут "name" это путь к папке с файлами из которых будет создаваться log-файл(имя которого задается в аппендере)-->
+            <appender-ref ref="FILESERVICE" />
+            <appender-ref ref="STDOUT" />
+    </logger>
 
 
     <root level = "INFO">  <!-- устанавливаем максимально возможную зону видимости (1-й уровень урезания уровня вывода)-->
         <appender-ref ref = "STDOUT"/> <!-- подгружаем аппендеры, которые будут действовать -->
-<!--        <appender-ref ref = "FILE"/>-->
-<!--        <appender-ref ref = "FILECONTROLLER"/>-->
-<!--        <appender-ref ref = "FILESERVICE"/>-->
+        <appender-ref ref = "FILE"/>
+        <appender-ref ref = "FILECONTROLLER"/>
+        <appender-ref ref = "FILESERVICE"/>
     </root>
 </configuration>
