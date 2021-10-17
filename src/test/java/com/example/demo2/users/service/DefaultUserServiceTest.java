@@ -52,7 +52,7 @@ public class DefaultUserServiceTest {
         assertThat(foundUser.getLogin()).isEqualTo("test_login");
     }
 
-    //Проверка, применяемого собственного исключения, для заккоментированного блока
+    //Проверка, применяемого собственного исключения, для закомментированного блока
     // кода в методе saveUser() класса "DefaultUsersService"
 //    @Test
 //    void saveUserThrowsValidationExceptionWhenLoginIsNull() {
@@ -64,8 +64,8 @@ public class DefaultUserServiceTest {
 //    }
 
 
-//Следующие два теста не нужны, т.к. в них применяются только встроенные шаблонные методы,
-// которые проверять нет смысла
+//Следующие два теста не нужны, т.к. в тестируемых методах применяются только встроенные
+// шаблонные методы, которые проверять нет смысла
     @Test
     void deleteUser() {}
     @Test

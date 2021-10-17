@@ -19,12 +19,12 @@
 function loadAllLogPas() {
                $.ajax({
                          type: "GET",
-                         url: "http://localhost:8080/admin/findAll",
+                         url: "https://localhost:443/admin/findAll",
+//                         url: "http://localhost:8080/admin/findAll",
                          dataType: 'json',
                          success:  function (users, status, xhr) {
                             let htmlAll = '<th>Id</th>\n' +
                                           '<th>Username</th>\n' +
-                                          '<th>Password</th>\n' +
                                           '<th>Role</th>\n' +
                                           '<th>Change Role</th>\n' +
                                           '<th>Change</th>\n' +
@@ -33,7 +33,6 @@ function loadAllLogPas() {
                                 html =  '<tr>' +
                                             '<td>' + user.id + '</td>\n' +
                                             '<td>' + user.username + '</td>\n' +
-                                            '<td>' + user.password + '</td>\n' +
                                             '<td>' + user.roles + '</td>\n' +
                                             '<td><select id="role' + user.id + '" name="select" required><option></option><option value="ADMIN">ADMIN</option><option value="USER">USER</option></select></td>\n' +
                                             '<td><button onclick="changeRoleLogPas(' + user.id + ')">Change Role</button></td>' +
@@ -55,7 +54,8 @@ function deleteLogPas(userId) {
              $.ajax({
                         dataType: 'json',
                         type: "DELETE",
-                        url: "http://localhost:8080/admin/delete/" + userId,
+                        url: "https://localhost:443/admin/delete/" + userId,
+//                        url: "http://localhost:8080/admin/delete/" + userId,
                         error: function (jqXHR, exception) {
                                myError(jqXHR, exception);
                         }
@@ -70,7 +70,8 @@ function changeRoleLogPas(userId) {
 
         $.ajax({
                         type: "PUT",
-                        url: "http://localhost:8080/admin/put/" + userId,
+                        url: "https://localhost:443/admin/put/" + userId,
+//                        url: "http://localhost:8080/admin/put/" + userId,
                         contentType: 'application/json',
                         data: {"":logpas},  //одно слово получилось передать на сервер только таким специфическим образом
                         success: function( resp, textStatus, jqXHR ){}

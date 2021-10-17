@@ -13,8 +13,8 @@ function findByLogin() {
     let login = $("#search_field").val();
     $.ajax({
              type: "GET",
-             url: "http://localhost:8080/users/findByLogin?param1="+login,
-//             url: "http://localhost:8080/users/findByLogin?param1=ann",
+             url: "https://localhost:443/users/findByLogin?param1="+login,
+//             url: "http://localhost:8080/users/findByLogin?param1="+login,
              contentType: 'application/json',
              success: function( user, textStatus, jqXHR ){
                 let html1 = '<table>' +
@@ -51,7 +51,8 @@ function findByLogin() {
 function loadAllUsers() {
                $.ajax({
                          type: "GET",
-                         url: "http://localhost:8080/users/findAll",
+                         url: "https://localhost:443/users/findAll",
+//                         url: "http://localhost:8080/users/findAll",
                          dataType: 'json',
                          success:  function (users, status, xhr) {
                             let htmlAll = '<th>User id</th>\n' +
@@ -83,7 +84,8 @@ function loadAllUsers() {
 function deleteUser(userId) {
              $.ajax({
                         type: "DELETE",
-                        url: "http://localhost:8080/users/delete/" + userId,
+                        url: "https://localhost:443/users/delete/" + userId,
+//                        url: "http://localhost:8080/users/delete/" + userId,
                         error: function (jqXHR, exception) {
                                myError(jqXHR, exception);
                         }
@@ -140,7 +142,8 @@ function createUser() {
            } else {
                $.ajax({
                        type: "POST",
-                       url: "http://localhost:8080/users/save",
+                       url: "https://localhost:443/users/save",
+//                       url: "http://localhost:8080/users/save",
                        data: JSON.stringify(user),
                        contentType: 'application/json',
                        success: function( resp, textStatus, jqXHR ){
@@ -164,13 +167,16 @@ function createUser() {
            }
 }
 
+
+
 function form() {
 
 let $formm = $('#form'); //получаем все данные с формы
   $formm.on('submit', function(e) {
     e.preventDefault(); //останавливаем автоматическую отправку данных с формы (без этого у меня: 1.Клиент от сервера получал инфу только после 2-й отправки данных, хотя сервер все проводил с первой 2.Вывод информации от сервера на листе клиента происходил на долю секунды, а потом срывался)
         $.ajax({
-            url: "http://localhost:8080/users/form",
+            url: "https://localhost:443/users/form",
+//            url: "http://localhost:8080/users/form",
             method: 'post',
             dataType: 'html',
             data: $formm.serialize(),

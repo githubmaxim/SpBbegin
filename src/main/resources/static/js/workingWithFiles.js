@@ -14,7 +14,8 @@ function loadAllFilesInfo() {
 
                $.ajax({
                          type: "GET",
-                         url: "http://localhost:8080/filesInfo/findAllFilesName",
+                         url: "https://localhost:443/filesInfo/findAllFilesName",
+//                         url: "http://localhost:8080/filesInfo/findAllFilesName",
                          dataType: 'json',
                          success:  function (filesName, status, xhr) {
                             let htmlAll = '<th>File name</th>\n' +
@@ -38,14 +39,16 @@ function loadAllFilesInfo() {
  }
 
 function downloadFileInfo(fileName) {
-         window.location.assign("http://localhost:8080/filesInfo/download?param1=" + fileName);
+         window.location.assign("https://localhost:443/filesInfo/download?param1=" + fileName);
+//         window.location.assign("http://localhost:8080/filesInfo/download?param1=" + fileName);
 // если использовать на сервере механизм @PathVariable, то -  window.location.assign("http://localhost:8080/filesInfo/download/" + fileName);
 }
 
 function deleteFileInfo(fileName) {
              $.ajax({
                         type: "DELETE",
-                        url: "http://localhost:8080/filesInfo/delete/" + fileName,
+                        url: "https://localhost:443/filesInfo/delete/" + fileName,
+//                        url: "http://localhost:8080/filesInfo/delete/" + fileName,
                         error: function (jqXHR, exception) {
                                myError(jqXHR, exception);
                         }
@@ -64,7 +67,8 @@ function downloadFile() {
 //         window.location.assign("http://localhost:8080/users/download/empty");
 
     } else {
-         window.location.assign("http://localhost:8080/filesInfo/download?param1=" + fileName);
+         window.location.assign("https://localhost:443/filesInfo/download?param1=" + fileName);
+//         window.location.assign("http://localhost:8080/filesInfo/download?param1=" + fileName);
 //         window.location.assign("http://localhost:8080/filesInfo/download/" + fileName);
     }
 }
@@ -89,8 +93,8 @@ function uploadFile() {
 
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:8080/filesInfo/upload",
-//			url: "http://localhost:8080/users/upload",
+			url: "https://localhost:443/filesInfo/upload",
+//			url: "http://localhost:8080/filesInfo/upload",
 			cache: false,
 			contentType: false,
 			processData: false,

@@ -15,9 +15,52 @@
 <div class="container">
 
     <div class="header">Шапка сайта</div>
-                <table id="logpasList"></table>
+    <div class="nav">
+        <div class="in_nav">
+            <ul class="nav_list">
+                <li class="nav_item">
+                    <a class="link1" href="index.html">
+                        Главная
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a class="link2" href="workingWithFields.html">
+                        Поля
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a class="link2" href="workingWithFiles.html">
+                        Файлы
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="layout">
+        <div class="col1">
+            <p><a class="link" href="index.html">На главную</a></p>
+            <p><a class="link" href="workingWithFields.html">Работа с полями</a></p>
+            <p><a class="link" href="workingWithFiles.html">Работа с файлами</a></p>
+        </div>
+
+        <!--    Insert constant block of HTML-text from another html file-->
+        <div id="loaded-template"></div>
+        <script type="text/javascript">
+               $('#loaded-template').load('ConstantBlock.html');
+            </script>
+
+        <div class="col2">
+            <table id="logpasList"></table>
+        </div>
+
+    </div>
     <div class="footer">&copy; Максим</div>
 </div>
+
+
 
 </body>
 </html>

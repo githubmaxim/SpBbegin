@@ -14,6 +14,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "logpas")
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder

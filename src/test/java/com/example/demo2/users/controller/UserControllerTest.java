@@ -4,11 +4,16 @@ import com.example.demo2.controller.users.UsersController;
 import com.example.demo2.service.users.UsersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
@@ -22,11 +27,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //Тут мы делаем тестирование формируемых контроллером сетевых ответов для Клиентов
 
-@WebMvcTest(UsersController.class)//@WebMvcTest вместо @SpringBootTest + говорим создать экземпляр только одного контроллера иначе
+//Такое написание аннотаций дает возможность тестировать страницы с доступом для всех ролей
+@ExtendWith(SpringExtension.class)
+@AutoConfigureTestDatabase
+@AutoConfigureMockMvc(addFilters = false)
+@WebMvcTest(controllers = UsersController.class)//@WebMvcTest вместо @SpringBootTest + говорим создать экземпляр только одного контроллера иначе
 // потребует создать @MockBean-заглушки для всех сервисов и репозиториев остальных контроллеров. @WebMvcTest вместо
 // @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще, кроме
 // заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
-@AutoConfigureMockMvc
 class UserControllerTest {
 
     @Autowired
@@ -73,7 +81,7 @@ class UserControllerTest {
                     .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is(444))
-                .andExpect(jsonPath("$").value("Such login is exist"));
+                .andExpect(jsonPath("$").value("Such a login exists"));
     }
 
     @Test

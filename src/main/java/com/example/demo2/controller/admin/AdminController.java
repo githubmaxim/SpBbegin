@@ -2,7 +2,6 @@ package com.example.demo2.controller.admin;
 
 
 import com.example.demo2.dto.registration.LogPasDto;
-import com.example.demo2.entity.registration.LogPas;
 import com.example.demo2.service.admin.AdminService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,8 @@ import java.util.List;
 @RequestMapping("/admin")
 @AllArgsConstructor
 @Slf4j
-@PreAuthorize("hasAuthority('ADMIN')") //это + еще в файле WebSecurityConfig.java нужно над классом дописать "@EnableGlobalMethodSecurity(prePostEnabled = true)" , для запуска механизма допуска к методам данного контроллера только с ролью "ADMIN'  при нашем "auth.jdbcAuthentication()" (вместо стандартных ".antMatchers("/admin/**").hasRole("ADMIN")" при "auth.inMemoryAuthentication()")
+@PreAuthorize("hasAuthority('ADMIN')") //это + еще в файле WebSecurityConfig.java нужно над классом дописать "@EnableGlobalMethodSecurity(prePostEnabled = true)" , для запуска механизма допуска к методам данного контроллера только с ролью "ADMIN'  при нашем "auth.jdbcAuthentication()" (вместо стандартных ".antMatchers("/admin/**").hasRole("ADMIN")" при "auth.inMemoryAuthentication()").
+                                       // Эта аннотация также может ставиться не для всего класса, а только над нужными методами.
 public class AdminController {
 
     private final AdminService adminService;

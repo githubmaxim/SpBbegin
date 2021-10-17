@@ -5,7 +5,9 @@ import com.example.demo2.controller.filesInfo.FilesInfoController;
 import com.example.demo2.service.filesInfo.FilesInfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,6 +15,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -30,11 +33,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 //Тут мы делаем тестирование формируемых контроллером сетевых ответов для Клиентов
 
+//Такое написание аннотаций дает возможность тестировать страницы с доступом для всех ролей
+@ExtendWith(SpringExtension.class)
+@AutoConfigureTestDatabase
+@AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(FilesInfoController.class)//@WebMvcTest вместо @SpringBootTest + говорим создать экземпляр только одного
 // контроллера иначе потребует создать @MockBean-заглушки для всех сервисов и репозиториев остальных контроллеров.
 // @WebMvcTest вместо @SpringBootTest, при желании запустить Unit-тестирование (при этом нужно будет сделать еще,
 // кроме заглушки сетевого соединения, заглушку для репозитория, сервиса и т.д.)
-@AutoConfigureMockMvc
 public class FilesInfoControllerTest {
 
     @Autowired
