@@ -1,20 +1,20 @@
 //!!!Ќе работающий метод разрешени€ механизмов POST,PUT,DELETE на страницах!!!!
-// Ёту строку дописать html-лист <meta name="csrf-token" content="{{ csrf_token() }}">
-// Ёти строки в скрипт:
-//    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+//   Ёту строку дописать в html-лист <meta name="csrf-token" content="{{ csrf_token() }}">
+//   Ёти строки в скрипт:
+//      var csrf_token = $('meta[name="csrf-token"]').attr('content');
 //
-//    function csrfSafeMethod(method) {
-//        // these HTTP methods do not require CSRF protection
-//        return (/^(GET|HEAD|OPTIONS)$/.test(method));
-//    }
+//      function csrfSafeMethod(method) {
+//          // these HTTP methods do not require CSRF protection
+//          return (/^(GET|HEAD|OPTIONS)$/.test(method));
+//      }
 //
-//    $.ajaxSetup({
-//        beforeSend: function(xhr, settings) {
-//            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-//                xhr.setRequestHeader("anti-csrf-token", csrf_token);
+//       $.ajaxSetup({
+//          beforeSend: function(xhr, settings) {
+//                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+//                  xhr.setRequestHeader("anti-csrf-token", csrf_token);
+//              }
 //            }
-//        }
-//    });
+//       });
 
 function loadAllLogPas() {
                $.ajax({

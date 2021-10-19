@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * This method is used for authorization.
+     * This method is used for authentication.
      * @param auth
      * @throws Exception
      */

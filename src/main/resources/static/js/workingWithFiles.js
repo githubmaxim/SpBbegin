@@ -87,7 +87,7 @@ function uploadFile() {
 		let formData = new FormData();
 		formData.append('file', $("#js-file")[0].files[0]);
 
-//Чтобы после отпраки клиентом файла у него опять не раскрывалось окно с просьбой выбрать очередной файл для отправки на сервер:
+//Чтобы после отправки клиентом файла у него опять не раскрывалось окно с просьбой выбрать очередной файл для отправки на сервер:
 		    event.stopPropagation(); // Остановка механизма отправки информации с полей ввода у клиента
             event.preventDefault();  // Полная остановка механизма отправки информации с полей ввода у клиента
 
@@ -101,7 +101,6 @@ function uploadFile() {
 			data: formData,
 			success: function( resp, textStatus, jqXHR ){
                         // Если все ОК
-
                         if( typeof resp.error === 'undefined' ){
                             $("#result").html(resp);
                              setTimeout(() => { $("#result").html(""); }, 1300); //очищаем поле чрез 15 секунд
