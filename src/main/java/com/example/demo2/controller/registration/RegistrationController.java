@@ -33,7 +33,8 @@ public class RegistrationController {
     @GetMapping("/")
     public String indexHtml() {
         log.info("+++message by RegistrationController, method indexHtml+++");
-        return "maiin";
+        return "index";
+//        return "maiin";
     }
 
 //    @GetMapping("/login") - не пишется т.к. в соответствии с настройками Spring Security сам предоставляет фильтр, который перехватывает этот запрос и аутентифицирует пользователя

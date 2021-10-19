@@ -48,3 +48,77 @@ Using generated security password: 168d41e8-9684-4e39-9ae9-003acf819798
 12:07:55.014 [https-jsse-nio-443-exec-8] [34mINFO [0;39m c.e.d.c.r.RegistrationController - +++message by RegistrationController, method indexHtml+++
 12:08:07.462 [https-jsse-nio-443-exec-1] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method findAllUsers+++
 12:08:07.462 [https-jsse-nio-443-exec-1] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling find all users request
+12:48:19.396 [main]                 [34mINFO [0;39m com.example.demo2.Application - Starting Application using Java 10.0.2 on My-PC with PID 7796 (D:\Java\Project IDEA\demo2\target\classes started by Макс in D:\Java\Project IDEA\demo2)
+12:48:19.396 [main]                 [34mINFO [0;39m com.example.demo2.Application - No active profile set, falling back to default profiles: default
+12:48:19.443 [background-preinit]   [34mINFO [0;39m o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.0.Final
+12:48:19.848 [background-preinit]   [31mWARN [0;39m o.s.h.c.j.Jackson2ObjectMapperBuilder - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath
+12:48:20.285 [main]                 [34mINFO [0;39m o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+12:48:20.348 [main]                 [34mINFO [0;39m o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 6 JPA repository interfaces.
+12:48:20.753 [main]                 [34mINFO [0;39m o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@64aad809' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+12:48:20.753 [main]                 [34mINFO [0;39m o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+12:48:21.143 [main]                 [34mINFO [0;39m o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 443 (https)
+12:48:21.159 [main]                 [34mINFO [0;39m o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["https-jsse-nio-443"]
+12:48:21.159 [main]                 [34mINFO [0;39m o.a.catalina.core.StandardService - Starting service [Tomcat]
+12:48:21.159 [main]                 [34mINFO [0;39m o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.46]
+12:48:21.268 [main]                 [34mINFO [0;39m o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+12:48:21.268 [main]                 [34mINFO [0;39m o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1778 ms
+12:48:21.440 [main]                 [34mINFO [0;39m o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+12:48:21.440 [main]                 [34mINFO [0;39m com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+12:48:21.689 [main]                 [34mINFO [0;39m com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+12:48:21.736 [main]                 [34mINFO [0;39m o.f.c.i.database.base.DatabaseType - Database: jdbc:mysql://localhost:3306/forflyway (MySQL 8.0)
+12:48:21.798 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.025s)
+12:48:21.798 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbMigrate - Current version of schema `forflyway`: 2
+12:48:21.798 [main]                 [34mINFO [0;39m o.f.core.internal.command.DbMigrate - Schema `forflyway` is up to date. No migration necessary.
+12:48:21.876 [main]                 [34mINFO [0;39m o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+12:48:21.939 [main]                 [34mINFO [0;39m org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.31.Final
+12:48:22.064 [main]                 [34mINFO [0;39m o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+12:48:22.157 [main]                 [34mINFO [0;39m org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+12:48:22.906 [main]                 [34mINFO [0;39m o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+12:48:22.922 [main]                 [34mINFO [0;39m o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+12:48:22.984 [main]                 [31mWARN [0;39m o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+12:48:23.764 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/css/**'] with []
+12:48:23.764 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/js/**'] with []
+12:48:23.764 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/fonts/**'] with []
+12:48:23.764 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure Ant [pattern='/images/**'] with []
+12:48:23.811 [main]                 [34mINFO [0;39m o.s.s.w.a.c.ChannelProcessingFilter - Validated configuration attributes
+12:48:23.811 [main]                 [34mINFO [0;39m o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.access.channel.ChannelProcessingFilter@115924ba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f0b5619, org.springframework.security.web.context.SecurityContextPersistenceFilter@1443539, org.springframework.security.web.header.HeaderWriterFilter@61c0fb12, org.springframework.security.web.authentication.logout.LogoutFilter@1adec8d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@252d2ac0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@237bdbcb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3cf7433e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67afc9b6, org.springframework.security.web.session.SessionManagementFilter@2faae7f6, org.springframework.security.web.access.ExceptionTranslationFilter@7db70494, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@504b4a97]
+12:48:24.060 [main]                 [34mINFO [0;39m o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+12:48:24.216 [main]                 [34mINFO [0;39m o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 80a99b17-1af2-4813-b67c-2268b80e79ce
+
+12:48:24.232 [main]                 [34mINFO [0;39m o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-443"]
+12:48:24.575 [main]                 [34mINFO [0;39m o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 443 (https) with context path ''
+12:48:24.591 [main]                 [34mINFO [0;39m com.example.demo2.Application - Started Application in 5.834 seconds (JVM running for 6.36)
+12:48:24.591 [main]                 [34mINFO [0;39m o.s.b.a.ApplicationAvailabilityBean - Application availability state LivenessState changed to CORRECT
+12:48:24.591 [main]                 [34mINFO [0;39m o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+12:48:46.794 [https-jsse-nio-443-exec-10] [34mINFO [0;39m o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+12:48:46.795 [https-jsse-nio-443-exec-10] [34mINFO [0;39m o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+12:48:46.796 [https-jsse-nio-443-exec-10] [34mINFO [0;39m o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+12:48:46.829 [https-jsse-nio-443-exec-10] [34mINFO [0;39m c.e.d.c.r.RegistrationController - +++message by RegistrationController, method indexHtml+++
+12:49:07.373 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method findAllUsers+++
+12:49:07.373 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling find all users request
+12:49:11.584 [https-jsse-nio-443-exec-3] [34mINFO [0;39m c.e.d.c.admin.AdminController - +++message by AdminController, method findALLLogPas+++
+12:49:54.112 [https-jsse-nio-443-exec-1] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method findAllFilesName+++
+12:49:54.112 [https-jsse-nio-443-exec-1] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - UserController: Handling find all users request
+12:50:00.033 [https-jsse-nio-443-exec-6] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by UserController, method deleteUsers+++
+12:50:00.034 [https-jsse-nio-443-exec-6] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - UserController: Handling delete user request: elvl842w0am8x09.jfif
+12:50:00.217 [https-jsse-nio-443-exec-7] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method findAllFilesName+++
+12:50:00.217 [https-jsse-nio-443-exec-7] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - UserController: Handling find all users request
+12:50:08.310 [https-jsse-nio-443-exec-8] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method singleFileUpload+++ file = org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@6d0e4b03
+12:50:09.774 [https-jsse-nio-443-exec-4] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method findAllFilesName+++
+12:50:09.774 [https-jsse-nio-443-exec-4] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - UserController: Handling find all users request
+12:51:09.642 [https-jsse-nio-443-exec-2] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method findAllUsers+++
+12:51:09.642 [https-jsse-nio-443-exec-2] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling find all users request
+12:51:13.255 [https-jsse-nio-443-exec-9] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method deleteUsers+++
+12:51:13.255 [https-jsse-nio-443-exec-9] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling delete user request: 12
+12:51:13.466 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method findAllUsers+++
+12:51:13.466 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling find all users request
+12:51:46.767 [https-jsse-nio-443-exec-8] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method saveUsers+++
+12:51:46.767 [https-jsse-nio-443-exec-8] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling save users: UsersDto(id=null, name=ann, login=ann, email=ann@com.ua, universities=University(id=null, name=KPI, cities=City(id=null, city=Kiev)))
+12:51:48.246 [https-jsse-nio-443-exec-3] [34mINFO [0;39m c.e.d.c.users.UsersController - +++message by UserController, method findAllUsers+++
+12:51:48.246 [https-jsse-nio-443-exec-3] [34mINFO [0;39m c.e.d.c.users.UsersController - UserController: Handling find all users request
+12:52:09.753 [https-jsse-nio-443-exec-2] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method findAllFilesName+++
+12:52:09.753 [https-jsse-nio-443-exec-2] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - UserController: Handling find all users request
+12:52:26.940 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - +++message by FilesInfoController, method download+++
+12:52:26.940 [https-jsse-nio-443-exec-5] [34mINFO [0;39m c.e.d.c.f.FilesInfoController - FilesInfoController: Handling find by fileName: eac7qhnuwaidiya.jfif
