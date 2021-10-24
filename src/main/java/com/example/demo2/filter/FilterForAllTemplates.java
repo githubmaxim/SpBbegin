@@ -7,8 +7,15 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import java.io.IOException;
 
+
+/**
+ * A class that creates a filter that is triggered when clients access any URLs.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Component
-@Order(1)
+@Order(1) //если будет несколько фильтров, то этот будет выполнен первым
 @Slf4j
 public class FilterForAllTemplates implements Filter {
     @Override

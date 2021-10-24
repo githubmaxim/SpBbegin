@@ -9,8 +9,13 @@ import org.springframework.stereotype.Component;
 import javax.servlet.*;
 import java.io.IOException;
 
-//@Component
-//@Order(2)
+
+/**
+ * A class that creates a filter that will be triggered when clients only access specific URL patterns.
+ *
+ * @author Maxim
+ * @version 1.0
+ */
 @Slf4j
 public class FilterForSomeTemplates implements Filter {
     @Override
