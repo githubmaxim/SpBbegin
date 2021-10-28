@@ -38,6 +38,7 @@
 Using generated security password: 76733a23-3b2e-4d0c-bfab-abeb69fb0aad
 
 
+
 12:05:22.961 [main]                 [34mINFO [0;39m o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["https-jsse-nio-443"]
 12:05:23.367 [main]                 [34mINFO [0;39m o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 443 (https) with context path ''
 12:05:23.383 [main]                 [34mINFO [0;39m com.example.demo2.Application - Started Application in 6.699 seconds (JVM running for 7.329)
