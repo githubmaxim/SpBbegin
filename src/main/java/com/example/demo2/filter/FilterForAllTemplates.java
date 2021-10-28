@@ -5,6 +5,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -23,7 +25,9 @@ public class FilterForAllTemplates implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterchain) throws IOException, ServletException, IOException {
-        log.info("Filter 1 for req : {}", request.getRemoteAddr());
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        log.info("Filter 1 for all templates URL : {}", req.getRequestURL());
         filterchain.doFilter(request, response); //обязательная строка в конце
     }
 

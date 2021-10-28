@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class RegistrationFilter {
 
     /**
-     * The method that registers the filter “FilterForAllTemplates.java” for the templates “/ users / delete” and “/ users / findAll”.
+     * The method that registers the filter FilterForAllTemplates.java for the templates.
      *
      * @return
      */
