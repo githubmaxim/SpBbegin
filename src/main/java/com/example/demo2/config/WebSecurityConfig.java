@@ -50,10 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/registration").permitAll()
                     .anyRequest().authenticated()
                     .and()
-                //Блок для подключения требования https протокола для всех страниц - не работает
-                .requiresChannel()
-                    .antMatchers("/**").requiresSecure()
-                    .and()
+//                .requiresChannel()
+//                    .antMatchers("/**").requiresSecure()
+//                    .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/maiin.html", true)
