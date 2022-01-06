@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * This method is used for authorization.
-     * @param http
+     * @param http by default
      * @throws Exception
      */
     @Override
@@ -66,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * This method is used for authentication.
-     * @param auth
+     * @param auth by default
      * @throws Exception
      */
     @Override
@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    Метод позволяющий подгружать на html-страницы файлы из перечисленных папок, до прохождения аутентификации
     /**
      * This method allows you to upload files from the listed folders to html pages before passing authentication.
-     * @param web
+     * @param web by default
      */
     @Override
     public void configure(WebSecurity web) {

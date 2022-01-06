@@ -20,7 +20,7 @@ public class RegistrationFilter {
     /**
      * The method that registers the filter FilterForAllTemplates.java for the templates.
      *
-     * @return
+     * @return by default
      */
     @Bean
     public FilterRegistrationBean<FilterForSomeTemplates> myFilter() {
