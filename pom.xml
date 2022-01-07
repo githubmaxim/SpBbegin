@@ -78,8 +78,10 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!--Дополнительная БД для подключения при тестировании в файле "UsersRepositoryTest.java" (показывается механизм
-        использования дополнительного (а не основного application.properties) файла свойств со своими настройками) -->
+        <!--Дополнительная БД ("in memory" по умолчанию) для подключения при тестировании в файле "UsersRepositoryTest.java" (показывается механизм
+        использования дополнительного (а не основного application.properties) файла свойств со своими настройками) +
+        для тестов контроллеров(аннотация @AutoConfigureTestDatabase) +
+         для работы блока аутентификации в файле "WebSecurityConfig.java"-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
