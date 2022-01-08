@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * This method is used for authorization.
      * @param http by default
-     * @throws Exception
+     * @throws Exception by default
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * This method is used for authentication.
      * @param auth by default
-     * @throws Exception
+     * @throws Exception by default
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
